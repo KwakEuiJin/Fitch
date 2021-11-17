@@ -1,12 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textview1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="4번화면 입니다."
-        android:textSize="40dp"/>
+        android:text="오늘 섭취해야하는 영양제"
+        android:textSize="30dp" />
+
+    <ListView
+        android:id="@+id/Listview1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="섭취한 영양제 추가" />
+
+    <TextView
+        android:id="@+id/textview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="나의 영양제"
+        android:textSize="30dp" />
+
+    <ListView
+        android:id="@+id/Listview2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="영양제 더보기" />
+    </LinearLayout>
 
 </LinearLayout>
