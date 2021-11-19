@@ -10,14 +10,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:orientation="vertical"
+        >
 
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"/>
 
         <ImageView
+            android:layout_marginTop="80dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -31,7 +29,9 @@
         android:hint="아이디"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:drawableLeft="@drawable/ic_baseline_person_24"/>
 
     <EditText
         android:id="@+id/et_pass"
@@ -41,7 +41,9 @@
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:textSize="20dp"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"/>
 
     <Button
         android:id="@+id/bt_login"
@@ -51,6 +53,7 @@
         android:layout_gravity="center"
         android:textSize="20dp"
         android:layout_marginTop="20dp"
+        android:backgroundTint="#3498DB"
         />
 
     <Button
@@ -61,6 +64,7 @@
         android:layout_gravity="center"
         android:textSize="20dp"
         android:layout_marginTop="20dp"
+        android:backgroundTint="#3498DB"
         />
 
 
