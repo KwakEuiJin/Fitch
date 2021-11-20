@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userID=et_id.getText().toString();
                 String userPass=et_pass.getText().toString();
-                UserID=userID;
+
 
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("userID",userID);
+                                UserID=userID;
                                 intent.putExtra("userPassword",userPass);
                                 intent.putExtra("userName",userName);
                                 intent.putExtra("userAge",userAge);

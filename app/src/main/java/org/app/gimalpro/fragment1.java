@@ -12,23 +12,45 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.SharedElementCallback;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import java.util.ArrayList;
 
 public class fragment1 extends Fragment {
     private View view;
-    Button bt_inputbody;
-    TextView tv_gender;
+    TextView tv_id,tv_body;
+    private DBHelper_body dbHelper_body;
+    private ArrayList<Bodyitem> bodyitems;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment1,container,false);
-        bt_inputbody=view.findViewById(R.id.bt_inputbody);
+        tv_id=view.findViewById(R.id.tv_id);
+        tv_body=view.findViewById(R.id.tv_body);
+        dbHelper_body = new DBHelper_body(getContext());
+        bodyitems = new ArrayList<>();
+        bodyitems=dbHelper_body.selectBody();
 
         Intent intent = getActivity().getIntent();
         String userGender = intent.getStringExtra("userGender");
+        tv_id.setText(LoginActivity.UserID+"님 환영합니다.");
+        try {
+            if (bodyitems.get(bodyitems.size()-1).getID().isEmpty()){
+                tv_body.setText("신체정보를 입력해주세요");}
+            else {
+                tv_body.setText("신체정보 업데이트");
+            }
+        } catch (ArrayIndexOutOfBoundsException e){
+            tv_body.setText("신체정보를 입력해주세요");
+        }
 
 
-        bt_inputbody.setOnClickListener(new View.OnClickListener() {
+
+        tv_body.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),BodyActivity.class);
@@ -41,13 +63,11 @@ public class fragment1 extends Fragment {
         });
 
 
-        // 객체기말 push
-        // 객체기말 push
-        // 객체기말 push
-
 
 
         return view;
 
     }
+
+
 }

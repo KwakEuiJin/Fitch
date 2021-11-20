@@ -71,32 +71,32 @@ public class BodyActivity extends AppCompatActivity {
                 btn_okbody.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Double userHeight=Double.parseDouble(et_height.getText().toString());
-                        Double userWeight=Double.parseDouble(et_weight.getText().toString());
-                        Double userMuscle=Double.parseDouble(et_muscle.getText().toString());
-                        Double userFat=Double.parseDouble(et_fat.getText().toString());
-                        //유저의 신체정보 등급 나누기
-                        Intent intent = getIntent();
 
-                        String userGender = intent.getStringExtra("userGender");
-                        Double mMuscle=0.0; //근육량
-                        Double Muscle_b=0.0; //근격골 비율
-                        int userMuscle_level=0; //근격골율 등급
-                        Double mFat = 0.0; //제지방량
-                        Double Fat_b=0.0; //체지방 비율
-                        int userFat_level=0; //체지방율 등급
 
                         if(et_height.length()==0||et_weight.length()==0||et_muscle.length()==0||et_fat.length()==0){
                             tv_height.setText("(CM)");
                             tv_weight.setText("(KG)");
                             tv_muscle.setText("(KG)");
                             tv_fat.setText("(KG)");
-
+                            Toast.makeText(getApplicationContext(), "값을 입력하세요", Toast.LENGTH_SHORT).show();
                         }
 
 
                         else {
-                            Toast.makeText(getApplicationContext(), userGender, Toast.LENGTH_SHORT).show();
+                            Double userHeight=Double.parseDouble(et_height.getText().toString());
+                            Double userWeight=Double.parseDouble(et_weight.getText().toString());
+                            Double userMuscle=Double.parseDouble(et_muscle.getText().toString());
+                            Double userFat=Double.parseDouble(et_fat.getText().toString());
+                            //유저의 신체정보 등급 나누기
+                            Intent intent = getIntent();
+
+                            String userGender = intent.getStringExtra("userGender");
+                            Double mMuscle=0.0; //근육량
+                            Double Muscle_b=0.0; //근격골 비율
+                            int userMuscle_level=0; //근격골율 등급
+                            Double mFat = 0.0; //제지방량
+                            Double Fat_b=0.0; //체지방 비율
+                            int userFat_level=0; //체지방율 등급
 
 
                             //제지방량 구하기
@@ -242,10 +242,7 @@ public class BodyActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Double userHeight=Double.parseDouble(et_height.getText().toString());
-                        Double userWeight=Double.parseDouble(et_weight.getText().toString());
-                        Double userMuscle=Double.parseDouble(et_muscle.getText().toString());
-                        Double userFat=Double.parseDouble(et_fat.getText().toString());
+
                         if(et_height.length()==0||et_weight.length()==0||et_muscle.length()==0||et_fat.length()==0){
                             tv_height.setText("(CM)");
                             tv_weight.setText("(KG)");
@@ -255,8 +252,10 @@ public class BodyActivity extends AppCompatActivity {
 
                         }
                         else{
-
-
+                            Double userHeight=Double.parseDouble(et_height.getText().toString());
+                            Double userWeight=Double.parseDouble(et_weight.getText().toString());
+                            Double userMuscle=Double.parseDouble(et_muscle.getText().toString());
+                            Double userFat=Double.parseDouble(et_fat.getText().toString());
                             //유저의 신체정보 등급 나누기
                             Intent intent = getIntent();
 
@@ -404,5 +403,10 @@ public class BodyActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
+    }
 }
