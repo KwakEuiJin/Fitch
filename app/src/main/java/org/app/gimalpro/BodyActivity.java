@@ -52,6 +52,8 @@ public class BodyActivity extends AppCompatActivity {
             }
         });
 
+
+        //신체정보 입력 버튼 이벤트
         bt_input=findViewById(R.id.bt_input);
         bt_input.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,10 +87,10 @@ public class BodyActivity extends AppCompatActivity {
                         int userFat_level=0; //체지방율 등급
 
                         if(et_height.length()==0||et_weight.length()==0||et_muscle.length()==0||et_fat.length()==0){
-                            tv_height.setText("CM");
-                            tv_weight.setText("KG");
-                            tv_muscle.setText("KG");
-                            tv_fat.setText("KG");
+                            tv_height.setText("(CM)");
+                            tv_weight.setText("(KG)");
+                            tv_muscle.setText("(KG)");
+                            tv_fat.setText("(KG)");
 
                         }
 
@@ -207,21 +209,23 @@ public class BodyActivity extends AppCompatActivity {
 
 
 
+        //길게누르면 신체정보 삭제(임의로 넣어둔 기능)
         tv_height.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 bodyitems = dbHelper_body.selectBody();
                 //db delete
                 dbHelper_body.deleteBody(LoginActivity.UserID,bodyitems.get(bodyitems.size()-1).getNUMBER());
-                tv_height.setText("CM");
-                tv_weight.setText("KG");
-                tv_muscle.setText("KG");
-                tv_fat.setText("KG");
+                tv_height.setText("(CM)");
+                tv_weight.setText("(KG)");
+                tv_muscle.setText("(KG)");
+                tv_fat.setText("(KG)");
 
                 return true;
             }
         });
 
+    //신체정보 수정하기 기능
         //update
         bt_update=findViewById(R.id.bt_update);
         bt_update.setOnClickListener(new View.OnClickListener() {
@@ -383,24 +387,24 @@ public class BodyActivity extends AppCompatActivity {
         bodyitems = dbHelper_body.selectBody();
 
         if(!bodyitems.isEmpty()) {
-            if ((tv_height.getText()).equals("CM")) {
+            if ((tv_height.getText()).equals("(CM)")) {
                 tv_height.setText(String.valueOf(bodyitems.get(bodyitems.size()-1).getHeight()));
             }
-            if ((tv_weight.getText()).equals("KG")) {
+            if ((tv_weight.getText()).equals("(KG)")) {
                 tv_weight.setText(String.valueOf(bodyitems.get(bodyitems.size()-1).getWeight()));
             }
-            if ((tv_muscle.getText()).equals("KG")) {
+            if ((tv_muscle.getText()).equals("(KG)")) {
                 tv_muscle.setText(String.valueOf(bodyitems.get(bodyitems.size()-1).getMuscle()));
             }
-            if ((tv_fat.getText()).equals("KG")) {
+            if ((tv_fat.getText()).equals("(KG)")) {
                 tv_fat.setText(String.valueOf(bodyitems.get(bodyitems.size()-1).getFat()));
             }
         }
         else{
-            tv_height.setText("CM");
-            tv_weight.setText("KG");
-            tv_muscle.setText("KG");
-            tv_fat.setText("KG");
+            tv_height.setText("(CM)");
+            tv_weight.setText("(KG)");
+            tv_muscle.setText("(KG)");
+            tv_fat.setText("(KG)");
         }
     }
 
