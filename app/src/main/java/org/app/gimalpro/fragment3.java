@@ -156,9 +156,7 @@ public class fragment3 extends Fragment {
             String kind =  c.getJSONObject("id").getString("kind"); // 종류를 체크하여 playlist도 저장
             if(kind.equals("youtube#video")){
                 vodid = c.getJSONObject("id").getString("videoId"); // 유튜브
-                // 동영상
-                // 아이디
-                // 값입니다.
+                // 동영상 아이디 값
                 // 재생시
                 // 필요합니다.
             }else{
@@ -185,14 +183,13 @@ public class fragment3 extends Fragment {
     //영상 제목을 받아올때 " ' 문자가 그대로 출력되기 때문에 다른 문자로 대체 해주기 위해 사용하는 메서드
     private String stringToHtmlSign(String str) {
 
-        return str.replaceAll("&", "[&]")
+        return str.replaceAll("&amp;", "[&]")
 
-                .replaceAll("[<]", "<")
+                .replaceAll("[<]", "&it;")
 
-                .replaceAll("[>]", ">")
+                .replaceAll("[>]", "&gt")
 
-                .replaceAll("&quot;", "'")
-
+                .replaceAll("&quot;","\"")
                 .replaceAll("&#39;", "'");
     }
 

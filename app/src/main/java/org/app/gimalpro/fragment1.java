@@ -27,8 +27,6 @@ public class fragment1 extends Fragment {
         Intent intent = getActivity().getIntent();
         String userGender = intent.getStringExtra("userGender");
 
-        tv_gender=view.findViewById(R.id.tv_gender);
-        tv_gender.setText(userGender);
 
         bt_inputbody.setOnClickListener(new View.OnClickListener() {
             @Override
