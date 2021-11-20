@@ -41,9 +41,9 @@ public class fragment1 extends Fragment {
         });
 
 
-
-
-
+        // 객체기말 push
+        // 객체기말 push
+        // 객체기말 push
 
 
 
