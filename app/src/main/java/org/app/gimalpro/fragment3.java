@@ -28,8 +28,9 @@ import java.util.ArrayList;
 
 public class fragment3 extends Fragment {
     private View view;
-    EditText search;
+    String search="추천";
     Button button;
+    Button bt_auto,bt_muscle_vi,bt_fat_vi,bt_music;
 
     AsyncTask<?, ?, ?> searchTask;
 
@@ -46,7 +47,53 @@ public class fragment3 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment3,container,false);
-        search = (EditText) view.findViewById(R.id.search);
+
+        bt_auto=view.findViewById(R.id.bt_auto);
+        bt_muscle_vi=view.findViewById(R.id.bt_muscle_vi);
+        bt_fat_vi=view.findViewById(R.id.bt_fat_vi);
+        bt_music=view.findViewById(R.id.bt_music);
+
+
+        bt_auto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search="추천";
+                searchTask = new searchTask().execute();
+            }
+        });
+        bt_muscle_vi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search="근력운동";
+                searchTask = new searchTask().execute();
+            }
+        });
+
+        bt_fat_vi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search="지방감량운동";
+                searchTask = new searchTask().execute();
+            }
+        });
+
+        bt_music.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search="운동할 때 듣는 노래";
+                searchTask = new searchTask().execute();
+            }
+        });
+
+
+
+
+
+
+
+
+
+        //유튜브 api코드
 
         button = (Button) view.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +154,7 @@ public class fragment3 extends Fragment {
 
 
         String originUrl = "https://www.googleapis.com/youtube/v3/search?"
-                + "part=snippet&q=" + search.getText().toString()
+                + "part=snippet&q=" + search
                 + "&key="+ serverKey+"&maxResults=50";
 
         String myUrl = String.format(originUrl);
