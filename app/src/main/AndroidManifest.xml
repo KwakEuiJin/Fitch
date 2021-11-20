@@ -3,6 +3,11 @@
     package="org.app.gimalpro">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <queries>
+        <intent>
+            <action android:name="com.google.android.youtube.api.service.START" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -34,6 +39,7 @@
             android:name=".MainActivity"
             android:exported="true"></activity>
         <activity android:name=".Supplement"></activity>
+        <activity android:name=".UtubePlay"/>
     </application>
 
 </manifest>
