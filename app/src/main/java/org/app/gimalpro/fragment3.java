@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class fragment3 extends Fragment {
     private View view;
-    String search="추천";
+    String search="홈트레이닝";
     Button button;
     Button bt_auto,bt_muscle_vi,bt_fat_vi,bt_music;
 
@@ -52,6 +52,8 @@ public class fragment3 extends Fragment {
         bt_muscle_vi=view.findViewById(R.id.bt_muscle_vi);
         bt_fat_vi=view.findViewById(R.id.bt_fat_vi);
         bt_music=view.findViewById(R.id.bt_music);
+
+        searchTask = new searchTask().execute();
 
 
         bt_auto.setOnClickListener(new View.OnClickListener() {

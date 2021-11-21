@@ -1,12 +1,17 @@
 package org.app.gimalpro;
 
 import android.app.Dialog;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,31 +24,38 @@ import java.util.Date;
 public class HealthActivity extends AppCompatActivity {
 
     private RecyclerView rv_todo;
-    private FloatingActionButton bt_write;
     private ArrayList<Todoitem> todoitems;
     private DBHelp_health_list dbHelpHealthlist;
     private Adapter adapter;
+    CalendarView calendar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health);
 
-        setInit();
-    }
+        //테이블이 빈경우 재생성
+        try {
+            setInit();
+        }
+        catch (SQLiteException e){
+            dbHelpHealthlist.onCreate(dbHelpHealthlist.getWritableDatabase());
+        }
+
+            }
 
     private void setInit() {
         dbHelpHealthlist = new DBHelp_health_list(this);
         rv_todo = findViewById(R.id.rv_todo);
-        bt_write = findViewById(R.id.bt_write);
         todoitems = new ArrayList<>();
 
-        //아래함수
-        loadRecentdb();
-
-        bt_write.setOnClickListener(new View.OnClickListener() {
+        //캘린더 코드
+        calendar = findViewById(R.id.calendar);
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 Dialog dialog = new Dialog(HealthActivity.this, android.R.style.Theme_Material_Light_Dialog);
                 dialog.setContentView(R.layout.dialog);
                 EditText et_title = dialog.findViewById(R.id.et_title);
@@ -53,14 +65,15 @@ public class HealthActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //db insert
-                        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());//현재시간 받아오기
-                        dbHelpHealthlist.insertTodo(LoginActivity.UserID,et_title.getText().toString(),et_content.getText().toString(),currentTime);
+                        String futureTime = String.format("%d년 %d월 %d일 ",year,month,dayOfMonth);
+                        String currentTime =new SimpleDateFormat("yyyy-MM/dd HH:mm:ss").format(new Date());//현재시간 받아오기
 
+                        dbHelpHealthlist.insertTodo(LoginActivity.UserID,et_title.getText().toString(),et_content.getText().toString(),currentTime,futureTime);
                         //ui insert
                         Todoitem item = new Todoitem();
                         item.setTitle(et_title.getText().toString());
                         item.setContent(et_content.getText().toString());
-                        item.setWritedate(currentTime);
+                        item.setWritedate(futureTime);
 
                         adapter.additem(item);
                         rv_todo.smoothScrollToPosition(0);
@@ -70,9 +83,13 @@ public class HealthActivity extends AppCompatActivity {
                     }
                 });
                 dialog.show();
-
             }
         });
+
+        //아래함수
+        loadRecentdb();
+
+
 
     }
 

@@ -21,7 +21,7 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS Todolist (NUMBER INTEGER PRIMARY KEY AUTOINCREMENT, ID TEXT NOT NULL, title TEXT NOT NULL, content TEXT NOT NULL, writedate TEXT NOT NULL  )");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Todolist (NUMBER INTEGER PRIMARY KEY AUTOINCREMENT, ID TEXT NOT NULL, title TEXT NOT NULL, content TEXT NOT NULL, writedate TEXT NOT NULL ,futuredate TEXT NOT NULL )");
 
 
     }
@@ -39,6 +39,7 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
                 String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
                 String content = cursor.getString(cursor.getColumnIndexOrThrow("content"));
                 String writedate = cursor.getString(cursor.getColumnIndexOrThrow("writedate"));
+                String futuredate = cursor.getString(cursor.getColumnIndexOrThrow("futuredate"));
 
                 Todoitem todoitem =new Todoitem();
                 todoitem.setNUMBER(NUMBER);
@@ -46,6 +47,7 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
                 todoitem.setTitle(title);
                 todoitem.setContent(content);
                 todoitem.setWritedate(writedate);
+                todoitem.setFuturedate(futuredate);
                 todoitems.add(todoitem);
 
 
@@ -60,9 +62,9 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
         onCreate(db);
     }
         //insert안에서 오토로 올려주는 애는 굳이 인설트 안해도됨(할일 목록을 널는 코드)
-     public void insertTodo(String _ID,String _title, String _content, String _writedate){
+     public void insertTodo(String _ID,String _title, String _content, String _writedate,String _futuredate){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO Todolist(ID ,title, content, writedate) VALUES ('"+_ID+"','"+_title+"', '"+_content+"','"+_writedate+"');");
+        db.execSQL("INSERT INTO Todolist(ID ,title, content, writedate,futuredate) VALUES ('"+_ID+"','"+_title+"', '"+_content+"','"+_writedate+"','"+_futuredate+"');");
     }
 
     //update문 할일 목록 업데이트
@@ -77,5 +79,9 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM Todolist WHERE writedate = '"+_beforedate+"' AND ID = '"+_ID+"'");
     }
 
-
+    //테이블 새로만들때 지우기
+    public void dropTodo() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE Todolist");
+    }
 }

@@ -7,6 +7,15 @@ public class Todoitem {
     private String title;
     private String content;
     private String writedate;
+    private String futuredate;
+
+    public String getFuturedate() {
+        return futuredate;
+    }
+
+    public void setFuturedate(String futuredate) {
+        this.futuredate = futuredate;
+    }
 
     public int getNUMBER() {
         return NUMBER;

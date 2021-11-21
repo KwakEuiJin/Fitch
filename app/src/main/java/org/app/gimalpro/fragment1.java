@@ -23,6 +23,7 @@ public class fragment1 extends Fragment {
     TextView tv_id,tv_body;
     private DBHelper_body dbHelper_body;
     private ArrayList<Bodyitem> bodyitems;
+    Button bt_health;
 
 
     @Nullable
@@ -31,6 +32,7 @@ public class fragment1 extends Fragment {
         view = inflater.inflate(R.layout.fragment1,container,false);
         tv_id=view.findViewById(R.id.tv_id);
         tv_body=view.findViewById(R.id.tv_body);
+        bt_health = view.findViewById(R.id.bt_health);
         dbHelper_body = new DBHelper_body(getContext());
         bodyitems = new ArrayList<>();
         bodyitems=dbHelper_body.selectBody();
@@ -59,6 +61,15 @@ public class fragment1 extends Fragment {
 
 
 
+            }
+        });
+
+        //임시로 만든 일정추가 액티비티 전환버튼
+        bt_health.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getActivity(),HealthActivity.class);
+                startActivity(intent1);
             }
         });
 

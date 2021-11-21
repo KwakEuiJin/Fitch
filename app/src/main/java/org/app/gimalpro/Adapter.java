@@ -96,12 +96,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                                         String content = et_content.getText().toString();
                                         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());//현재시간 받아오기
                                         String beforedate = todoitem.getWritedate();
+                                        String futuredate = todoitem.getFuturedate();
                                         dbHelpHealthlist.updateTodo(LoginActivity.UserID,tittle,content,currentTime,beforedate);
 
                                         //ui update
                                         todoitem.setTitle(tittle);
                                         todoitem.setContent(content);
-                                        todoitem.setWritedate(currentTime);
+                                        todoitem.setWritedate(futuredate);
                                         notifyItemChanged(curpos,todoitem);
                                         dialog.dismiss();
                                         Toast.makeText(context.getApplicationContext(), "목록수정 완료", Toast.LENGTH_SHORT).show();
