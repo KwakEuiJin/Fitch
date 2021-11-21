@@ -43,7 +43,8 @@ public class HealthActivity extends AppCompatActivity {
         catch (SQLiteException e){
             dbHelpHealthlist.onCreate(dbHelpHealthlist.getWritableDatabase());
         }
-
+        //최소날짜 지정
+        setCalendar(calendar);
             }
 
     private void setInit() {
@@ -89,8 +90,12 @@ public class HealthActivity extends AppCompatActivity {
         //아래함수
         loadRecentdb();
 
+    }
 
-
+    public void setCalendar(CalendarView calendar) {
+        this.calendar = calendar;
+        long selectedDate = calendar.getDate();
+        calendar.setMinDate(selectedDate);
     }
 
     private void loadRecentdb() {
