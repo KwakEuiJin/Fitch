@@ -42,7 +42,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tv_title.setText(todoitems.get(position).getTitle());
         holder.tv_content.setText(todoitems.get(position).getContent());
-        holder.tv_date.setText(todoitems.get(position).getWritedate());
+        holder.tv_date.setText(todoitems.get(position).getFuturedate());
 
     }
 

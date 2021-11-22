@@ -31,7 +31,7 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
         ArrayList<Todoitem> todoitems = new ArrayList<>();
         String _ID=LoginActivity.UserID;
         SQLiteDatabase db=getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM Todolist WHERE ID='"+_ID+"' ORDER BY writedate DESC",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM Todolist WHERE ID='"+_ID+"'",null);
         if (cursor.getCount() !=0){    //if문의 getCount가 0이 아니라는 의미는 db에 정보가 있다는 뜻
             while(cursor.moveToNext()){
                 int NUMBER = cursor.getInt(cursor.getColumnIndexOrThrow("NUMBER"));

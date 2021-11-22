@@ -36,18 +36,6 @@ public class HealthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health);
 
-        //테이블이 빈경우 재생성
-        try {
-            setInit();
-        }
-        catch (SQLiteException e){
-            dbHelpHealthlist.onCreate(dbHelpHealthlist.getWritableDatabase());
-        }
-        //최소날짜 지정
-        setCalendar(calendar);
-            }
-
-    private void setInit() {
         dbHelpHealthlist = new DBHelp_health_list(this);
         rv_todo = findViewById(R.id.rv_todo);
         todoitems = new ArrayList<>();
@@ -90,7 +78,10 @@ public class HealthActivity extends AppCompatActivity {
         //아래함수
         loadRecentdb();
 
-    }
+        //최소날짜 지정
+        setCalendar(calendar);
+            }
+
 
     public void setCalendar(CalendarView calendar) {
         this.calendar = calendar;
@@ -105,8 +96,6 @@ public class HealthActivity extends AppCompatActivity {
             adapter = new Adapter(todoitems,this);
             rv_todo.setHasFixedSize(true);
             rv_todo.setAdapter(adapter);
-
-
         }
     }
 }
