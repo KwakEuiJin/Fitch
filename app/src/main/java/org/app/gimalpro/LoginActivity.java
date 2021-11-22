@@ -19,7 +19,7 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     EditText et_id,et_pass;
     private Button bt_login,bt_register;
-    public static String UserID;
+    public static String _UserID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("userID",userID);
-                                UserID=userID;
+                                _UserID=userID;
                                 intent.putExtra("userPassword",userPass);
                                 intent.putExtra("userName",userName);
                                 intent.putExtra("userAge",userAge);

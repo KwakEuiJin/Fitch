@@ -29,7 +29,7 @@ public class MoreSupplement extends SQLiteOpenHelper {
     public void start(){
 
         SQLiteDatabase db=getReadableDatabase();
-        String _ID = LoginActivity.UserID;
+        String _ID = MainActivity.UserID;
         Cursor cursor = db.rawQuery("SELECT * FROM Body WHERE ID='"+_ID+"'",null);
         if (cursor.getCount() !=0) {
             while (cursor.moveToNext()) {

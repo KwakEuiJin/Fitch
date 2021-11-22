@@ -34,7 +34,7 @@ public class DBHelper_body extends SQLiteOpenHelper {
     public ArrayList<Bodyitem> selectBody(){
         ArrayList<Bodyitem> bodyitems = new ArrayList<>();
         SQLiteDatabase db=getReadableDatabase();
-        String _ID = LoginActivity.UserID;
+        String _ID = MainActivity.UserID;
         Cursor cursor = db.rawQuery("SELECT * FROM Body WHERE ID='"+_ID+"'",null);
         if (cursor.getCount() !=0){    //if문의 getCount가 0이 아니라는 의미는 db에 정보가 있다는 뜻
             while(cursor.moveToNext()){

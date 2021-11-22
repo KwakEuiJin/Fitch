@@ -39,7 +39,7 @@ public class fragment1 extends Fragment {
 
         Intent intent = getActivity().getIntent();
         String userGender = intent.getStringExtra("userGender");
-        tv_id.setText(LoginActivity.UserID+"님 환영합니다.");
+        tv_id.setText(MainActivity.UserID+"님 환영합니다.");
         try {
             if (bodyitems.get(bodyitems.size()-1).getID().isEmpty()){
                 tv_body.setText("신체정보를 입력해주세요");}

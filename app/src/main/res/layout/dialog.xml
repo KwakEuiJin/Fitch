@@ -33,20 +33,16 @@
             android:layout_height="17dp"
             android:layout_marginTop="16dp"
             android:text="시간,추가 내용"
-            app:layout_constraintStart_toStartOf="@+id/et_title"
-            app:layout_constraintTop_toBottomOf="@+id/et_title" />
+            app:layout_constraintStart_toStartOf="@+id/spinner"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
-        <EditText
-            android:id="@+id/et_title"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:text=""
+            android:entries="@array/exercise"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_des_title" />
 

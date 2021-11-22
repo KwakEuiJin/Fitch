@@ -24,7 +24,7 @@ public class DBHelp_supplementlist extends SQLiteOpenHelper {
 
     public ArrayList<Toeat> getToeatlist(){
         ArrayList<Toeat> toeats = new ArrayList<>();
-        String _id=LoginActivity.UserID;
+        String _id=MainActivity.UserID;
         SQLiteDatabase db=getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM Toeatlist WHERE id='"+_id+"' ",null);
         if (cursor.getCount() !=0){    //if문의 getCount가 0이 아니라는 의미는 db에 정보가 있다는 뜻

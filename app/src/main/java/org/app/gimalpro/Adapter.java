@@ -6,8 +6,10 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private ArrayList<Todoitem> todoitems;
     private Context context;
     private DBHelp_health_list dbHelpHealthlist;
+    private String exercise;
 
     public Adapter(ArrayList<Todoitem> todoitems, Context context) {
         this.todoitems = todoitems;
@@ -79,25 +82,45 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                                 //수정
                                 Dialog dialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                                 dialog.setContentView(R.layout.dialog);
-                                EditText et_title = dialog.findViewById(R.id.et_title);
+                                Spinner spinner = dialog.findViewById(R.id.spinner);
                                 EditText et_content = dialog.findViewById(R.id.et_content);
                                 Button btn_ok = dialog.findViewById(R.id.bt_ok);
+                                //스피너 예전 데이터로 셀렉션 시켜놓는 코드
+                                int spinner_id=0;
+                                if(todoitem.getTitle().contains("조깅")){
+                                    spinner_id=1;
+                                }
+                                else if (todoitem.getTitle().contains("푸쉬업")){
+                                    spinner_id=2;
+                                }
+                                spinner.setSelection(spinner_id);
+                                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        exercise=spinner.getSelectedItem().toString();
+                                    }
 
-                                et_title.setText(todoitem.getTitle());
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
+
                                 et_content.setText(todoitem.getContent());
+
                                 //커서 이동
-                                et_title.setSelection(et_title.getText().length());
+                                et_content.setSelection(et_content.getText().length());
 
                                 btn_ok.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         //db update
-                                        String tittle = et_title.getText().toString();
+                                        String tittle = exercise;
                                         String content = et_content.getText().toString();
                                         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());//현재시간 받아오기
                                         String beforedate = todoitem.getWritedate();
                                         String futuredate = todoitem.getFuturedate();
-                                        dbHelpHealthlist.updateTodo(LoginActivity.UserID,tittle,content,currentTime,beforedate);
+                                        dbHelpHealthlist.updateTodo(MainActivity.UserID,tittle,content,currentTime,beforedate);
 
                                         //ui update
                                         todoitem.setTitle(tittle);
@@ -115,7 +138,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                             else if (position ==1){
                                 //테이블 삭제
                                 String beforedate = todoitem.getWritedate();
-                                dbHelpHealthlist.deleteTodo(beforedate,LoginActivity.UserID);
+                                dbHelpHealthlist.deleteTodo(beforedate,MainActivity.UserID);
 
                                 //delete ui
                                 todoitems.remove(curpos);

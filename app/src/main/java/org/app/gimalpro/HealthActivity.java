@@ -6,9 +6,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -47,7 +49,7 @@ public class HealthActivity extends AppCompatActivity {
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 Dialog dialog = new Dialog(HealthActivity.this, android.R.style.Theme_Material_Light_Dialog);
                 dialog.setContentView(R.layout.dialog);
-                EditText et_title = dialog.findViewById(R.id.et_title);
+                Spinner spinner = dialog.findViewById(R.id.spinner);
                 EditText et_content = dialog.findViewById(R.id.et_content);
                 Button btn_ok = dialog.findViewById(R.id.bt_ok);
                 btn_ok.setOnClickListener(new View.OnClickListener() {
@@ -56,11 +58,11 @@ public class HealthActivity extends AppCompatActivity {
                         //db insert
                         String futureTime = String.format("%d년 %d월 %d일 ",year,month,dayOfMonth);
                         String currentTime =new SimpleDateFormat("yyyy-MM/dd HH:mm:ss").format(new Date());//현재시간 받아오기
-
-                        dbHelpHealthlist.insertTodo(LoginActivity.UserID,et_title.getText().toString(),et_content.getText().toString(),currentTime,futureTime);
+                        String exercise = spinner.getSelectedItem().toString();
+                        dbHelpHealthlist.insertTodo(MainActivity.UserID,exercise,et_content.getText().toString(),currentTime,futureTime);
                         //ui insert
                         Todoitem item = new Todoitem();
-                        item.setTitle(et_title.getText().toString());
+                        item.setTitle(exercise);
                         item.setContent(et_content.getText().toString());
                         item.setWritedate(futureTime);
 
@@ -75,11 +77,10 @@ public class HealthActivity extends AppCompatActivity {
             }
         });
 
-        //아래함수
-        loadRecentdb();
-
         //최소날짜 지정
         setCalendar(calendar);
+        //아래함수
+        loadRecentdb();
             }
 
 

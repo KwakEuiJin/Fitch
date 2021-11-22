@@ -175,7 +175,7 @@ public class BodyActivity extends AppCompatActivity {
                                 }}
 
                         //db insert
-                        dbHelper_body.insertBody(LoginActivity.UserID,userHeight,userWeight,userMuscle,userFat,userMuscle_level,userFat_level);
+                        dbHelper_body.insertBody(MainActivity.UserID,userHeight,userWeight,userMuscle,userFat,userMuscle_level,userFat_level);
 
                         //ui insert
                         Bodyitem item = new Bodyitem();
@@ -215,7 +215,7 @@ public class BodyActivity extends AppCompatActivity {
             public boolean onLongClick(View v) {
                 bodyitems = dbHelper_body.selectBody();
                 //db delete
-                dbHelper_body.deleteBody(LoginActivity.UserID,bodyitems.get(bodyitems.size()-1).getNUMBER());
+                dbHelper_body.deleteBody(MainActivity.UserID,bodyitems.get(bodyitems.size()-1).getNUMBER());
                 tv_height.setText("(CM)");
                 tv_weight.setText("(KG)");
                 tv_muscle.setText("(KG)");
@@ -344,7 +344,7 @@ public class BodyActivity extends AppCompatActivity {
 
                         //update
                         if(!bodyitems.isEmpty()){
-                        dbHelper_body.updateBody(LoginActivity.UserID,userHeight,userWeight,userMuscle,userFat, bodyitems.get(bodyitems.size()-1).getNUMBER(),userMuscle_level,userFat_level);
+                        dbHelper_body.updateBody(MainActivity.UserID,userHeight,userWeight,userMuscle,userFat, bodyitems.get(bodyitems.size()-1).getNUMBER(),userMuscle_level,userFat_level);
                         Bodyitem item = new Bodyitem();
                         item.setHeight(userHeight);
                         item.setWeight(userWeight);

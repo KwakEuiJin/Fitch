@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Bodyitem> bodyitems;
     private ActivityResultLauncher<Intent> resultLauncher;
 
+    public static final String UserID=LoginActivity._UserID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

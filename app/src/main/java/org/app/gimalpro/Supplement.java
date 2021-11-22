@@ -46,7 +46,7 @@ public class Supplement extends AppCompatActivity {
                 btn_fin.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dbHelpSupplementlist.insertToeat(LoginActivity.UserID,etName.getText().toString(),etNut.getText().toString());
+                        dbHelpSupplementlist.insertToeat(MainActivity.UserID,etName.getText().toString(),etNut.getText().toString());
 
                         Toeat item = new Toeat();
                         item.setname(etName.getText().toString());

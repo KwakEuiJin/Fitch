@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="exercise">
+        <item>운동을 고르시오</item>
+        <item>조깅</item>
+        <item>푸쉬업</item>
+        <item>플랭크</item>
+        <item>그 외 운동</item>
+
+    </string-array>
+
+</resources>

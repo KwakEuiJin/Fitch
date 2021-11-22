@@ -29,7 +29,7 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
     //select문 할일 목록 조회
     public ArrayList<Todoitem> getTodolist(){
         ArrayList<Todoitem> todoitems = new ArrayList<>();
-        String _ID=LoginActivity.UserID;
+        String _ID=MainActivity.UserID;
         SQLiteDatabase db=getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM Todolist WHERE ID='"+_ID+"'",null);
         if (cursor.getCount() !=0){    //if문의 getCount가 0이 아니라는 의미는 db에 정보가 있다는 뜻
