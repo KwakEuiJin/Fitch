@@ -5,24 +5,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textview1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="오늘 섭취해야하는 영양제"
-        android:textSize="30dp" />
-
-    <ListView
-        android:id="@+id/Listview1"
-        android:layout_width="match_parent"
-        android:layout_height="150dp" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="섭취한 영양제 추가" />
-
-    <TextView
         android:id="@+id/textview2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
