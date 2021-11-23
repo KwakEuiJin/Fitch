@@ -69,12 +69,11 @@ public class fragment2 extends Fragment {
 
 
 
-
         switchstart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                //처음에 버튼을 다 visible로 세팅 + 연한 색으로 설정
+                //처음에 버튼을 다 visible로 세팅
                 btn_walking.setVisibility(view.VISIBLE);
                 btn_hiking.setVisibility(view.VISIBLE);
                 btn_swimming.setVisibility(view.VISIBLE);
@@ -84,7 +83,7 @@ public class fragment2 extends Fragment {
                 btn_weighttraing.setVisibility(view.VISIBLE);
                 btn_cycle.setVisibility(view.VISIBLE);
 
-
+                //버튼 배경색을 회색으로, 버튼 글자색은 잘 안보이는 흰끼도는 색으로.
                 btn_walking.setBackgroundColor(Color.parseColor("#f2f5fa"));
                 btn_walking.setTextColor(Color.parseColor("#cfd8e8"));
 
@@ -109,8 +108,10 @@ public class fragment2 extends Fragment {
                 btn_cycle.setBackgroundColor(Color.parseColor("#f2f5fa"));
                 btn_cycle.setTextColor(Color.parseColor("#cfd8e8"));
 
+
                 String str_muscle_lvl = "";
                 String str_fat_lvl = "";
+
                 // switch가 ON 상태일 때
                 if (switchstart.isChecked() == true) {
                     btnanaerobic.setVisibility(View.VISIBLE); // 무산소
@@ -125,7 +126,6 @@ public class fragment2 extends Fragment {
                        }catch (ArrayIndexOutOfBoundsException e){
                         Toast.makeText(getContext(), "신체정보를 입력하시오", Toast.LENGTH_SHORT).show();
                     }
-
 
                     //유산소+무산소 4개 추천하기 위해 a라는 배열에 4개의 랜덤 숫자 생성 (ex. 1 3 2 4, 1 4 2 3, ...)
                     int count = 4; // 난수 생성 갯수
@@ -146,51 +146,120 @@ public class fragment2 extends Fragment {
                     // 1. 근육 레벨 == 지방 레벨 -> (무산소2, 유산소2)
                     if(Integer.parseInt(str_muscle_lvl)==Integer.parseInt(str_fat_lvl)){
 
-                        text_view_explain.setText("당신은 근육량과 지방량의 균형이 알맞습니다.\n무산소 운동 두 개, 유산소 운동 두 개를 추천해줄게요");
-                        text_view_explain.setTextSize(20);
+                        //특이케이스 처리 - 근육량, 지방량이 모두 0인 경우
+                        if(Integer.parseInt(str_muscle_lvl)==0 && Integer.parseInt(str_fat_lvl)==0){
+                            text_view_explain.setText("당신은 근육량과 지방량이 모두 부족합니다. \n먼저 무산소 운동 세 개, 유산소 운동 한 개를 추천해줄게요");
+                            text_view_explain.setTextSize(20);
 
+                            //첫번째, 두번째, 세번째로 나온 랜덤숫자는 추천할 무산소운동의 index
+                            for(int i=0; i< 3; i++){
+                                if(rand_list[i]==1){
+                                    btn_running.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_running.setTextColor(Color.parseColor("#000000"));
+                                }
+                                else if(rand_list[i]==2){
+                                    btn_weighttraing.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_weighttraing.setTextColor(Color.parseColor("#000000"));
+                                }
+                                else if(rand_list[i]==3){
+                                    btn_jump.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_jump.setTextColor(Color.parseColor("#000000"));
+                                }
+                                else if(rand_list[i]==4){
+                                    btn_squat.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_squat.setTextColor(Color.parseColor("#000000"));
+                                }
+                            }
 
-                        //첫번째, 두번째로 나온 랜덤숫자는 추천할 무산소운동의 index
-                        for(int i=0; i< 2; i++){
-                            if(rand_list[i]==1){
-                                btn_running.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                                btn_running.setTextColor(Color.parseColor("#000000"));
+                            //네번째로 나온 랜덤숫자는 추천할 유산소운동의 index
+                            for(int i= 3; i< count; i++){
+                                if(rand_list[i]==1){
+                                    btn_cycle.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_cycle.setTextColor(Color.parseColor("#000000"));
+                                }
+                                else if(rand_list[i]==2){
+                                    btn_swimming.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_swimming.setTextColor(Color.parseColor("#000000"));
+                                }
+                                else if(rand_list[i]==3){
+                                    btn_hiking.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_hiking.setTextColor(Color.parseColor("#000000"));
+                                }
+                                else if(rand_list[i]==4){
+                                    btn_walking.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_walking.setTextColor(Color.parseColor("#000000"));
+                                }
                             }
-                            else if(rand_list[i]==2){
-                                btn_weighttraing.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                                btn_weighttraing.setTextColor(Color.parseColor("#000000"));
+
+                        }
+
+                        //특이케이스 처리 - 근육량, 지방량이 모두 2인 경우
+                        else if(Integer.parseInt(str_muscle_lvl)== 2 && Integer.parseInt(str_fat_lvl)==2){
+                            text_view_explain.setText("근육량과 지방량이 많습니다. \n균형을 위해 먼저 유산소 운동 네 개를 추천해줄게요");
+                            text_view_explain.setTextSize(20);
+
+                            //세번째, 네번째로 나온 랜덤숫자는 추천할 유산소운동의 index
+                            for(int i= 0; i< count; i++){
+                                if(rand_list[i]==1){
+                                    btn_cycle.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_cycle.setTextColor(Color.parseColor("#000000"));
+                                }
+                                else if(rand_list[i]==2){
+                                    btn_swimming.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_swimming.setTextColor(Color.parseColor("#000000"));
+                                }
+                                else if(rand_list[i]==3){
+                                    btn_hiking.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_hiking.setTextColor(Color.parseColor("#000000"));
+                                }
+                                else if(rand_list[i]==4){
+                                    btn_walking.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_walking.setTextColor(Color.parseColor("#000000"));
+                                }
                             }
-                            else if(rand_list[i]==3){
-                                btn_jump.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                                btn_jump.setTextColor(Color.parseColor("#000000"));
+
+                        }
+
+                        //근육량, 지방량이 모두 1인 경우
+                        else {
+                            text_view_explain.setText("당신은 근육량과 지방량의 균형이 알맞습니다.\n무산소 운동 두 개, 유산소 운동 두 개를 추천해줄게요");
+                            text_view_explain.setTextSize(20);
+                            //첫번째, 두번째로 나온 랜덤숫자는 추천할 무산소운동의 index
+                            for (int i = 0; i < 2; i++) {
+                                if (rand_list[i] == 1) {
+                                    btn_running.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_running.setTextColor(Color.parseColor("#000000"));
+                                } else if (rand_list[i] == 2) {
+                                    btn_weighttraing.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_weighttraing.setTextColor(Color.parseColor("#000000"));
+                                } else if (rand_list[i] == 3) {
+                                    btn_jump.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_jump.setTextColor(Color.parseColor("#000000"));
+                                } else if (rand_list[i] == 4) {
+                                    btn_squat.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_squat.setTextColor(Color.parseColor("#000000"));
+                                }
                             }
-                            else if(rand_list[i]==4){
-                                btn_squat.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                                btn_squat.setTextColor(Color.parseColor("#000000"));
+
+                            //세번째, 네번째로 나온 랜덤숫자는 추천할 유산소운동의 index
+                            for (int i = 2; i < count; i++) {
+                                if (rand_list[i] == 1) {
+                                    btn_cycle.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_cycle.setTextColor(Color.parseColor("#000000"));
+                                } else if (rand_list[i] == 2) {
+                                    btn_swimming.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_swimming.setTextColor(Color.parseColor("#000000"));
+                                } else if (rand_list[i] == 3) {
+                                    btn_hiking.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_hiking.setTextColor(Color.parseColor("#000000"));
+                                } else if (rand_list[i] == 4) {
+                                    btn_walking.setBackgroundColor(Color.parseColor("#b0c9f5"));
+                                    btn_walking.setTextColor(Color.parseColor("#000000"));
+                                }
                             }
                         }
 
-                        //세번째, 네번째로 나온 랜덤숫자는 추천할 유산소운동의 index
-                        for(int i= 2; i< count; i++){
-                            if(rand_list[i]==1){
-                                btn_cycle.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                                btn_cycle.setTextColor(Color.parseColor("#000000"));
-                            }
-                            else if(rand_list[i]==2){
-                                btn_swimming.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                                btn_swimming.setTextColor(Color.parseColor("#000000"));
-                            }
-                            else if(rand_list[i]==3){
-                                btn_hiking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                                btn_hiking.setTextColor(Color.parseColor("#000000"));
-                            }
-                            else if(rand_list[i]==4){
-                                btn_walking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                                btn_walking.setTextColor(Color.parseColor("#000000"));
-                            }
-                        }
-
-                                            }
+                    }
 
                     // 2. 근육 레벨 > 지방 레벨  -> (무산소3, 유산소1)
                     else if(Integer.parseInt(str_muscle_lvl) > Integer.parseInt(str_fat_lvl)){
@@ -285,7 +354,6 @@ public class fragment2 extends Fragment {
                             }
                         }
                     }
-
 
                 }
 
