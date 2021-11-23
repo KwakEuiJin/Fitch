@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,7 @@ public class fragment2 extends Fragment {
     Button btn_running, btn_weighttraing, btn_jump, btn_squat; // 무산소 운동
     Button btn_cycle, btn_swimming, btn_hiking, btn_walking; // 유산소 운동
 
-
+    TextView text_view_explain;
 
 
     @Nullable
@@ -62,6 +63,9 @@ public class fragment2 extends Fragment {
         btn_swimming = view.findViewById(R.id.btn_swimming);
         btn_hiking = view.findViewById(R.id.btn_hiking);
         btn_walking = view.findViewById(R.id.btn_walking);
+
+        // 설명창
+        text_view_explain = view.findViewById(R.id.TextViewExplain);
 
 
 
@@ -115,11 +119,13 @@ public class fragment2 extends Fragment {
                     try {
                         str_muscle_lvl = Integer.toString(bodyitems.get(bodyitems.size() - 1).getMuscle_level());
                         str_fat_lvl = Integer.toString(bodyitems.get(bodyitems.size() - 1).getFat_level());
+                        Toast.makeText(getContext(), "근육레벨: " + str_muscle_lvl + " 지방레벨: " + str_fat_lvl, Toast.LENGTH_LONG).show();
 
-                        Toast.makeText(getContext(), "string muscle:" + str_muscle_lvl + " fat: " + str_fat_lvl, Toast.LENGTH_SHORT).show();
-                    }catch (ArrayIndexOutOfBoundsException e){
+
+                       }catch (ArrayIndexOutOfBoundsException e){
                         Toast.makeText(getContext(), "신체정보를 입력하시오", Toast.LENGTH_SHORT).show();
                     }
+
 
                     //유산소+무산소 4개 추천하기 위해 a라는 배열에 4개의 랜덤 숫자 생성 (ex. 1 3 2 4, 1 4 2 3, ...)
                     int count = 4; // 난수 생성 갯수
@@ -139,6 +145,10 @@ public class fragment2 extends Fragment {
                     // 근육 레벨과 지방 레벨 비교 후 3가지 case에 따라 알맞은 운동 조합 추천
                     // 1. 근육 레벨 == 지방 레벨 -> (무산소2, 유산소2)
                     if(Integer.parseInt(str_muscle_lvl)==Integer.parseInt(str_fat_lvl)){
+
+                        text_view_explain.setText("당신은 근육량과 지방량의 균형이 알맞습니다.\n무산소 운동 두 개, 유산소 운동 두 개를 추천해줄게요");
+                        text_view_explain.setTextSize(20);
+
 
                         //첫번째, 두번째로 나온 랜덤숫자는 추천할 무산소운동의 index
                         for(int i=0; i< 2; i++){
@@ -181,8 +191,12 @@ public class fragment2 extends Fragment {
                         }
 
                                             }
+
                     // 2. 근육 레벨 > 지방 레벨  -> (무산소3, 유산소1)
                     else if(Integer.parseInt(str_muscle_lvl) > Integer.parseInt(str_fat_lvl)){
+
+                        text_view_explain.setText("당신은 상대적으로 지방량이 적습니다.\n무산소 운동 세 개, 유산소 운동 한 개를 추천해줄게요");
+                        text_view_explain.setTextSize(20);
 
                         //첫번째, 두번째, 세번째로 나온 랜덤숫자는 추천할 무산소운동의 index
                         for(int i=0; i< 3; i++){
@@ -224,8 +238,12 @@ public class fragment2 extends Fragment {
                             }
                         }
                     }
+
                     // 3. 근육 레벨 < 지방 레벨  -> (무산소1, 유산소3)
                     else if(Integer.parseInt(str_muscle_lvl) < Integer.parseInt(str_fat_lvl)){
+
+                        text_view_explain.setText("당신은 상대적으로 지방량이 많습니다.\n 무산소 운동 한 개, 유산소 운동 세 개를 추천해줄게요");
+                        text_view_explain.setTextSize(20);
 
                         //첫번째로 나온 랜덤숫자는 추천할 무산소운동의 index
                         for(int i=0; i< 1; i++){
