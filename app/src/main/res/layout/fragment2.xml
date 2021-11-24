@@ -12,13 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Switch
-            android:id="@+id/switchstart"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:text="운동 추천받기"
-            android:textSize="20dp" />
-
         <TextView
             android:id="@+id/TextViewExplain"
             android:layout_width="match_parent"
@@ -48,6 +41,7 @@
             android:layout_weight="1"
             android:text="유산소 운동 추천"
             android:visibility="invisible" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -105,12 +99,12 @@
         android:layout_height="70dp">
 
         <Button
-            android:id="@+id/btn_jump"
+            android:id="@+id/btn_pushup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="점프"
+            android:text="푸쉬업"
             android:textColor="@color/black"
             android:visibility="invisible" />
 
@@ -149,6 +143,13 @@
             android:textColor="@color/black"
             android:visibility="invisible" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView" />
 
 
 </LinearLayout>

@@ -59,7 +59,7 @@ public class fragment3 extends Fragment {
         bt_auto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                search="추천";
+                search="유산소 홈트레이닝";
                 searchTask = new searchTask().execute();
             }
         });

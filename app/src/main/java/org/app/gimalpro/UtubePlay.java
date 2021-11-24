@@ -15,7 +15,7 @@ public class UtubePlay extends YouTubeBaseActivity implements
 
     private YouTubePlayerView ytpv;
     private YouTubePlayer ytp;
-    final String serverKey="본인의 앱키를 입력하세요"; //콘솔에서 받아온 서버키를 넣어줍니다
+    final String serverKey="AIzaSyBVYooHOM99Nzvf4fnLqAuV0Tp8Rs9v-dw";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
