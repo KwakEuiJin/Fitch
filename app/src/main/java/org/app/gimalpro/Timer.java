@@ -13,10 +13,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class Timer extends AppCompatActivity {  TextView myOutput;
     TextView tv_cal;
     Button bt_start;
     Button bt_pause,bt_end;
+    DBHelper_body dbHelper_body;
+    private ArrayList<Bodyitem> bodyitems;
+    Double user_Kcal;
 
     int sec,min,mis;
     //시간이 남으면 시간도 적용
@@ -36,23 +41,30 @@ public class Timer extends AppCompatActivity {  TextView myOutput;
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_timer);
 
+        dbHelper_body=new DBHelper_body(this);
+
         Intent intent = getIntent();
         sec_kcal=intent.getDoubleExtra("kcal",0.5);
-
-        myOutput = (TextView) findViewById(R.id.time_out);
+        myOutput = findViewById(R.id.time_out);
         tv_cal=findViewById(R.id.tv_cal);
-        bt_start = (Button) findViewById(R.id.bt_start);
-        bt_pause = (Button) findViewById(R.id.bt_pause);
+        bt_start = findViewById(R.id.bt_start);
+        bt_pause = findViewById(R.id.bt_pause);
         bt_end=findViewById(R.id.bt_end);
         bt_end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 long now = SystemClock.elapsedRealtime();
-                Intent intent = new Intent();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 myBaseTime += (now- myPauseTime);
-                intent.putExtra("user_kcal",getCal());
-                Toast.makeText(getApplicationContext(), getCal().toString(), Toast.LENGTH_SHORT).show();
-                setResult(100,intent);
+                intent.putExtra("f2","f2");
+                bodyitems = dbHelper_body.selectBody();
+                try {
+                    user_Kcal=bodyitems.get(bodyitems.size()-1).getKcal();
+                } catch (ArrayIndexOutOfBoundsException e){
+                    user_Kcal=0.0;
+                }
+                user_Kcal+=getCal();
+                dbHelper_body.updateKcal(MainActivity.UserID,user_Kcal);
                 finish();
             }
         });
@@ -79,6 +91,7 @@ public class Timer extends AppCompatActivity {  TextView myOutput;
                         System.out.println(myBaseTime);
                         cur_Status = Start; //현재상태를 런상태로 변경
                         bt_start.setEnabled(false);
+                        bt_end.setEnabled(false);
                         break;
                     case Pause:
                         long now = SystemClock.elapsedRealtime();
@@ -87,6 +100,7 @@ public class Timer extends AppCompatActivity {  TextView myOutput;
                         cur_Status=Start;
                         bt_pause.setText("멈춤");
                         bt_start.setEnabled(false);
+                        bt_end.setEnabled(false);
                         break;
 
 
@@ -103,6 +117,7 @@ public class Timer extends AppCompatActivity {  TextView myOutput;
                         cur_Status = Pause;
                         bt_start.setEnabled(true);
                         bt_pause.setText("초기화");
+                        bt_end.setEnabled(true);
                         break;
 
                     case Pause:

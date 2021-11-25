@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,16 +23,13 @@ public class fragment2 extends Fragment {
     private DBHelper_body dbHelper_body;
     private ArrayList<Bodyitem> bodyitems;
     private View view;
+    Double userWeight=50.0;
     Double user_kcal=0.0;
     //임시
     TextView textView;
 
-
-    Switch switchstart;
-    Button  btnanaerobic, btnaerobic;  // 운동 일지 추가, 무산소 운동, 유산소 운동
-
     Button btn_running, btn_weighttraing, btn_pushup, btn_squat; // 무산소 운동
-    Button btn_cycle, btn_swimming, btn_hiking, btn_walking; // 유산소 운동
+    Button btn_cycle, btn_jul, btn_mountin, btn_walking; // 유산소 운동
 
     TextView text_view_explain;
 
@@ -47,12 +42,20 @@ public class fragment2 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment2, container, false);
-
+        //db 객체 선언
+        dbHelper_body=new DBHelper_body(getContext());
         //임시
         textView=view.findViewById(R.id.textView);
-
+        bt_gone();
         buttonstart();
-        Double userWeight = bodyitems.get(bodyitems.size()-1).getWeight();
+        try {
+            bodyitems = dbHelper_body.selectBody();
+            userWeight = bodyitems.get(bodyitems.size()-1).getWeight();
+            user_kcal = bodyitems.get(bodyitems.size()-1).getKcal();
+        } catch (ArrayIndexOutOfBoundsException e){
+
+        }
+        textView.setText(String.format("%.2f %s",user_kcal,"Kcal"));
 
 
         //버튼이벤트
@@ -64,7 +67,8 @@ public class fragment2 extends Fragment {
                     Intent intent = new Intent(getActivity(),Timer.class);
                     Double kcal=(8.0*userWeight)/3600;
                     intent.putExtra("kcal",kcal);
-                    startActivityForResult(intent,0);
+                    startActivity(intent);
+
                 }
             });
             //그 외 근력운동
@@ -72,6 +76,9 @@ public class fragment2 extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(),Timer.class);
+                    Double kcal=(5.5*userWeight)/3600;
+                    intent.putExtra("kcal",kcal);
+
                     startActivity(intent);
                 }
             });
@@ -80,6 +87,8 @@ public class fragment2 extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(),Timer.class);
+                    Double kcal=(6.0*userWeight)/3600;
+                    intent.putExtra("kcal",kcal);
                     startActivity(intent);
                 }
             });
@@ -88,6 +97,8 @@ public class fragment2 extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(),Timer.class);
+                    Double kcal=(6.0*userWeight)/3600;
+                    intent.putExtra("kcal",kcal);
                     startActivity(intent);
                 }
             });
@@ -96,6 +107,8 @@ public class fragment2 extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(),Timer.class);
+                    Double kcal=(5.5*userWeight)/3600;
+                    intent.putExtra("kcal",kcal);
                     startActivity(intent);
                 }
             });
@@ -106,12 +119,15 @@ public class fragment2 extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(),Timer.class);
+                    Double kcal=(6.0*userWeight)/3600;
+                    intent.putExtra("kcal",kcal);
                     startActivity(intent);
                 }
             });
         } catch (ArrayIndexOutOfBoundsException e){
             Toast.makeText(getContext(), "신체정보를 입력해주세요", Toast.LENGTH_SHORT).show();
         }
+
 
 
 
@@ -124,69 +140,12 @@ public class fragment2 extends Fragment {
     //버튼이벤트
     public void buttonstart(){
         bodyitem = new Bodyitem();
-        dbHelper_body = new DBHelper_body(getContext());
-
-        // 무산소 운동, 유산소 운동
-        btnanaerobic = view.findViewById(R.id.btnanaerobic);
-        btnaerobic = view.findViewById(R.id.btnaerobic);
-
-        // 무산소 운동 종류
-        btn_running = view.findViewById(R.id.btn_running);
-        btn_weighttraing = view.findViewById(R.id.btn_weighttraining);
-        btn_pushup = view.findViewById(R.id.btn_pushup);
-        btn_squat = view.findViewById(R.id.btn_squat);
-
-        // 유산소 운동 종류
-        btn_cycle = view.findViewById(R.id.btn_cycle);
-        btn_swimming = view.findViewById(R.id.btn_swimming);
-        btn_hiking = view.findViewById(R.id.btn_hiking);
-        btn_walking = view.findViewById(R.id.btn_walking);
-
-        // 설명창
-        text_view_explain = view.findViewById(R.id.TextViewExplain);
-
-        btn_walking.setVisibility(view.VISIBLE);
-        btn_hiking.setVisibility(view.VISIBLE);
-        btn_swimming.setVisibility(view.VISIBLE);
-        btn_running.setVisibility(view.VISIBLE);
-        btn_squat.setVisibility(view.VISIBLE);
-        btn_pushup.setVisibility(view.VISIBLE);
-        btn_weighttraing.setVisibility(view.VISIBLE);
-        btn_cycle.setVisibility(view.VISIBLE);
-
-        //버튼 배경색을 회색으로, 버튼 글자색은 잘 안보이는 흰끼도는 색으로.
-        btn_walking.setBackgroundColor(Color.parseColor("#f2f5fa"));
-        btn_walking.setTextColor(Color.parseColor("#cfd8e8"));
-
-        btn_hiking.setBackgroundColor(Color.parseColor("#f2f5fa"));
-        btn_hiking.setTextColor(Color.parseColor("#cfd8e8"));
-
-        btn_swimming.setBackgroundColor(Color.parseColor("#f2f5fa"));
-        btn_swimming.setTextColor(Color.parseColor("#cfd8e8"));
-
-        btn_running.setBackgroundColor(Color.parseColor("#f2f5fa"));
-        btn_running.setTextColor(Color.parseColor("#cfd8e8"));
-
-        btn_squat.setBackgroundColor(Color.parseColor("#f2f5fa"));
-        btn_squat.setTextColor(Color.parseColor("#cfd8e8"));
-
-        btn_pushup.setBackgroundColor(Color.parseColor("#f2f5fa"));
-        btn_pushup.setTextColor(Color.parseColor("#cfd8e8"));
-
-        btn_weighttraing.setBackgroundColor(Color.parseColor("#f2f5fa"));
-        btn_weighttraing.setTextColor(Color.parseColor("#cfd8e8"));
-
-        btn_cycle.setBackgroundColor(Color.parseColor("#f2f5fa"));
-        btn_cycle.setTextColor(Color.parseColor("#cfd8e8"));
-
 
         String str_muscle_lvl = "";
         String str_fat_lvl = "";
 
         // switch가 ON 상태일 때
 
-        btnanaerobic.setVisibility(View.VISIBLE); // 무산소
-        btnaerobic.setVisibility(View.VISIBLE);  // 유산소
         bodyitems = dbHelper_body.selectBody();
         try {
             str_muscle_lvl = Integer.toString(bodyitems.get(bodyitems.size() - 1).getMuscle_level());
@@ -226,40 +185,32 @@ public class fragment2 extends Fragment {
                     //첫번째, 두번째, 세번째로 나온 랜덤숫자는 추천할 무산소운동의 index
                     for(int i=0; i< 3; i++){
                         if(rand_list[i]==1){
-                            btn_running.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_running.setTextColor(Color.parseColor("#000000"));
+                           btn_running.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==2){
-                            btn_weighttraing.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_weighttraing.setTextColor(Color.parseColor("#000000"));
+                            btn_weighttraing.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==3){
-                            btn_pushup.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_pushup.setTextColor(Color.parseColor("#000000"));
+                            btn_pushup.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==4){
-                            btn_squat.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_squat.setTextColor(Color.parseColor("#000000"));
+                            btn_pushup.setVisibility(View.VISIBLE);
                         }
                     }
 
                     //네번째로 나온 랜덤숫자는 추천할 유산소운동의 index
                     for(int i= 3; i< count; i++){
                         if(rand_list[i]==1){
-                            btn_cycle.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_cycle.setTextColor(Color.parseColor("#000000"));
+                            btn_cycle.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==2){
-                            btn_swimming.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_swimming.setTextColor(Color.parseColor("#000000"));
+                           btn_jul.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==3){
-                            btn_hiking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_hiking.setTextColor(Color.parseColor("#000000"));
+                           btn_mountin.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==4){
-                            btn_walking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_walking.setTextColor(Color.parseColor("#000000"));
+                            btn_walking.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -273,20 +224,16 @@ public class fragment2 extends Fragment {
                     //세번째, 네번째로 나온 랜덤숫자는 추천할 유산소운동의 index
                     for(int i= 0; i< count; i++){
                         if(rand_list[i]==1){
-                            btn_cycle.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_cycle.setTextColor(Color.parseColor("#000000"));
+                            btn_cycle.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==2){
-                            btn_swimming.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_swimming.setTextColor(Color.parseColor("#000000"));
+                            btn_jul.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==3){
-                            btn_hiking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_hiking.setTextColor(Color.parseColor("#000000"));
+                           btn_mountin.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==4){
-                            btn_walking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_walking.setTextColor(Color.parseColor("#000000"));
+                            btn_walking.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -299,34 +246,29 @@ public class fragment2 extends Fragment {
                     //첫번째, 두번째로 나온 랜덤숫자는 추천할 무산소운동의 index
                     for (int i = 0; i < 2; i++) {
                         if (rand_list[i] == 1) {
-                            btn_running.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_running.setTextColor(Color.parseColor("#000000"));
+                           btn_running.setVisibility(View.VISIBLE);
                         } else if (rand_list[i] == 2) {
-                            btn_weighttraing.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_weighttraing.setTextColor(Color.parseColor("#000000"));
+                           btn_weighttraing.setVisibility(View.VISIBLE);
                         } else if (rand_list[i] == 3) {
-                            btn_pushup.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_pushup.setTextColor(Color.parseColor("#000000"));
+                            btn_pushup.setVisibility(View.VISIBLE);
                         } else if (rand_list[i] == 4) {
-                            btn_squat.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_squat.setTextColor(Color.parseColor("#000000"));
+                            btn_squat.setVisibility(View.VISIBLE);
                         }
                     }
 
                     //세번째, 네번째로 나온 랜덤숫자는 추천할 유산소운동의 index
                     for (int i = 2; i < count; i++) {
-                        if (rand_list[i] == 1) {
-                            btn_cycle.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_cycle.setTextColor(Color.parseColor("#000000"));
-                        } else if (rand_list[i] == 2) {
-                            btn_swimming.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_swimming.setTextColor(Color.parseColor("#000000"));
-                        } else if (rand_list[i] == 3) {
-                            btn_hiking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_hiking.setTextColor(Color.parseColor("#000000"));
-                        } else if (rand_list[i] == 4) {
-                            btn_walking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                            btn_walking.setTextColor(Color.parseColor("#000000"));
+                        if(rand_list[i]==1){
+                            btn_cycle.setVisibility(View.VISIBLE);
+                        }
+                        else if(rand_list[i]==2){
+                            btn_jul.setVisibility(View.VISIBLE);
+                        }
+                        else if(rand_list[i]==3){
+                            btn_mountin.setVisibility(View.VISIBLE);
+                        }
+                        else if(rand_list[i]==4){
+                            btn_walking.setVisibility(View.VISIBLE);
                         }
                     }
                 }
@@ -341,41 +283,30 @@ public class fragment2 extends Fragment {
 
                 //첫번째, 두번째, 세번째로 나온 랜덤숫자는 추천할 무산소운동의 index
                 for(int i=0; i< 3; i++){
-                    if(rand_list[i]==1){
-                        btn_running.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_running.setTextColor(Color.parseColor("#000000"));
-                    }
-                    else if(rand_list[i]==2){
-                        btn_weighttraing.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_weighttraing.setTextColor(Color.parseColor("#000000"));
-                    }
-                    else if(rand_list[i]==3){
-                        btn_pushup.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_pushup.setTextColor(Color.parseColor("#000000"));
-                    }
-                    else if(rand_list[i]==4){
-                        btn_squat.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_squat.setTextColor(Color.parseColor("#000000"));
+                    if (rand_list[i] == 1) {
+                        btn_running.setVisibility(View.VISIBLE);
+                    } else if (rand_list[i] == 2) {
+                        btn_weighttraing.setVisibility(View.VISIBLE);
+                    } else if (rand_list[i] == 3) {
+                        btn_pushup.setVisibility(View.VISIBLE);
+                    } else if (rand_list[i] == 4) {
+                        btn_squat.setVisibility(View.VISIBLE);
                     }
                 }
 
                 //네번째로 나온 랜덤숫자는 추천할 유산소운동의 index
                 for(int i= 3; i< count; i++){
                     if(rand_list[i]==1){
-                        btn_cycle.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_cycle.setTextColor(Color.parseColor("#000000"));
+                        btn_cycle.setVisibility(View.VISIBLE);
                     }
                     else if(rand_list[i]==2){
-                        btn_swimming.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_swimming.setTextColor(Color.parseColor("#000000"));
+                        btn_jul.setVisibility(View.VISIBLE);
                     }
                     else if(rand_list[i]==3){
-                        btn_hiking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_hiking.setTextColor(Color.parseColor("#000000"));
+                        btn_mountin.setVisibility(View.VISIBLE);
                     }
                     else if(rand_list[i]==4){
-                        btn_walking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_walking.setTextColor(Color.parseColor("#000000"));
+                        btn_walking.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -388,56 +319,35 @@ public class fragment2 extends Fragment {
 
                 //첫번째로 나온 랜덤숫자는 추천할 무산소운동의 index
                 for(int i=0; i< 1; i++){
-                    if(rand_list[i]==1){
-                        btn_running.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_running.setTextColor(Color.parseColor("#000000"));
-                    }
-                    else if(rand_list[i]==2){
-                        btn_weighttraing.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_weighttraing.setTextColor(Color.parseColor("#000000"));
-                    }
-                    else if(rand_list[i]==3){
-                        btn_pushup.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_pushup.setTextColor(Color.parseColor("#000000"));
-                    }
-                    else if(rand_list[i]==4){
-                        btn_squat.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_squat.setTextColor(Color.parseColor("#000000"));
+                    if (rand_list[i] == 1) {
+                        btn_running.setVisibility(View.VISIBLE);
+                    } else if (rand_list[i] == 2) {
+                        btn_weighttraing.setVisibility(View.VISIBLE);
+                    } else if (rand_list[i] == 3) {
+                        btn_pushup.setVisibility(View.VISIBLE);
+                    } else if (rand_list[i] == 4) {
+                        btn_squat.setVisibility(View.VISIBLE);
                     }
                 }
 
                 //두번째, 세번째, 네번째로 나온 랜덤숫자는 추천할 유산소운동의 index
                 for(int i= 1; i< count; i++){
                     if(rand_list[i]==1){
-                        btn_cycle.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_cycle.setTextColor(Color.parseColor("#000000"));
+                        btn_cycle.setVisibility(View.VISIBLE);
                     }
                     else if(rand_list[i]==2){
-                        btn_swimming.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_swimming.setTextColor(Color.parseColor("#000000"));
+                        btn_jul.setVisibility(View.VISIBLE);
                     }
                     else if(rand_list[i]==3){
-                        btn_hiking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_hiking.setTextColor(Color.parseColor("#000000"));
+                        btn_mountin.setVisibility(View.VISIBLE);
                     }
                     else if(rand_list[i]==4){
-                        btn_walking.setBackgroundColor(Color.parseColor("#b0c9f5"));
-                        btn_walking.setTextColor(Color.parseColor("#000000"));
+                        btn_walking.setVisibility(View.VISIBLE);
                     }
                 }
             }
         } catch (NumberFormatException e){
             Toast.makeText(getContext(), "신체정보를 입력하시면 운동을 추천해드립니다.", Toast.LENGTH_SHORT).show();
-            btnanaerobic.setVisibility(View.VISIBLE);
-            btnaerobic.setVisibility(View.VISIBLE);
-            btn_running.setVisibility(View.VISIBLE);
-            btn_weighttraing.setVisibility(View.VISIBLE);
-            btn_pushup.setVisibility(View.VISIBLE);
-            btn_squat.setVisibility(View.VISIBLE);
-            btn_cycle.setVisibility(View.VISIBLE);
-            btn_swimming.setVisibility(View.VISIBLE);
-            btn_hiking.setVisibility(View.VISIBLE);
-            btn_walking.setVisibility(View.VISIBLE);
         }
     }
 
@@ -451,12 +361,48 @@ public class fragment2 extends Fragment {
                 return;
             }
             user_kcal = data.getExtras().getDouble("user_kcal");
-            textView.setText(user_kcal.toString());
+
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            bodyitems = dbHelper_body.selectBody();
+            userWeight = bodyitems.get(bodyitems.size()-1).getWeight();
+            user_kcal = bodyitems.get(bodyitems.size()-1).getKcal();
+        } catch (ArrayIndexOutOfBoundsException e){
 
+        }
+        textView.setText(String.format("%.2f %s",user_kcal,"Kcal"));
+    }
 
+    public void bt_gone(){
+        btn_running = view.findViewById(R.id.btn_running);
+        btn_weighttraing = view.findViewById(R.id.btn_weighttraining);
+        btn_pushup = view.findViewById(R.id.btn_pushup);
+        btn_squat = view.findViewById(R.id.btn_squat);
+
+        // 유산소 운동 종류
+        btn_cycle = view.findViewById(R.id.btn_cycle);
+        btn_jul = view.findViewById(R.id.btn_jul);
+        btn_mountin = view.findViewById(R.id.btn_mountin);
+        btn_walking = view.findViewById(R.id.btn_walking);
+
+        // 설명창
+        text_view_explain = view.findViewById(R.id.TextViewExplain);
+
+        btn_running.setVisibility(View.GONE);
+        btn_weighttraing.setVisibility(View.GONE);
+        btn_pushup.setVisibility(View.GONE);
+        btn_squat.setVisibility(View.GONE);
+        btn_cycle.setVisibility(View.GONE);
+        btn_jul.setVisibility(View.GONE);
+        btn_mountin.setVisibility(View.GONE);
+        btn_walking.setVisibility(View.GONE);
+    }
 }
+
 
 

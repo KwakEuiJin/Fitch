@@ -8,6 +8,15 @@ public class Bodyitem {
     private Double Muscle;
     private int Muscle_level;
     private int Fat_level;
+    private Double Kcal;
+
+    public Double getKcal() {
+        return Kcal;
+    }
+
+    public void setKcal(Double kcal) {
+        Kcal = kcal;
+    }
 
     public int getMuscle_level() {
         return Muscle_level;
