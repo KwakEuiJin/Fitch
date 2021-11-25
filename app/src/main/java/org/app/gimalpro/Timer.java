@@ -126,6 +126,8 @@ public class Timer extends AppCompatActivity {  TextView myOutput;
                         tv_cal.setText("0 kcal");
                         cur_Status = Start;
                         bt_pause.setText("멈춤");
+                        bt_end.setEnabled(true);
+                        bt_start.setEnabled(true);
 
 
                 }

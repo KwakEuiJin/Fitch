@@ -53,14 +53,14 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_running"
+            android:id="@+id/btn_witmom"
             android:layout_width="100dp"
             android:backgroundTint="#292929"
             android:layout_height="100dp"
             android:layout_margin="10dp"
             android:gravity="center|bottom"
-            android:text="달리기"
-            android:background="@drawable/run"
+            android:text="윗몸일으키기"
+            android:background="@drawable/size_witmom"
             android:textColor="@color/black"
              />
 
@@ -90,7 +90,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
                     android:gravity="center|bottom"
-                    android:background="@drawable/jul1"
+                    android:background="@drawable/jul3"
                     android:text="줄넘기"
                     android:textColor="@color/black"/>
 
@@ -167,6 +167,19 @@
             android:gravity="center|bottom"
             android:text="걷기"
             android:textColor="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_running"
+            android:layout_width="100dp"
+            android:backgroundTint="#292929"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:gravity="center|bottom"
+            android:text="달리기"
+            android:background="@drawable/run"
+            android:textColor="@color/black"
+            />
+
     </LinearLayout>
     </HorizontalScrollView>
     </LinearLayout>

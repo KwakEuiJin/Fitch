@@ -28,7 +28,7 @@ public class fragment2 extends Fragment {
     //임시
     TextView textView;
 
-    Button btn_running, btn_weighttraing, btn_pushup, btn_squat; // 무산소 운동
+    Button btn_running, btn_weighttraing, btn_pushup, btn_squat, btn_witmom; // 무산소 운동
     Button btn_cycle, btn_jul, btn_mountin, btn_walking; // 유산소 운동
 
     TextView text_view_explain;
@@ -124,7 +124,8 @@ public class fragment2 extends Fragment {
                     startActivity(intent);
                 }
             });
-        } catch (ArrayIndexOutOfBoundsException e){
+        }
+        catch (ArrayIndexOutOfBoundsException e){
             Toast.makeText(getContext(), "신체정보를 입력해주세요", Toast.LENGTH_SHORT).show();
         }
 
@@ -236,7 +237,6 @@ public class fragment2 extends Fragment {
                             btn_walking.setVisibility(View.VISIBLE);
                         }
                     }
-
                 }
 
                 //근육량, 지방량이 모두 1인 경우
@@ -379,10 +379,12 @@ public class fragment2 extends Fragment {
     }
 
     public void bt_gone(){
+        //무산소
         btn_running = view.findViewById(R.id.btn_running);
         btn_weighttraing = view.findViewById(R.id.btn_weighttraining);
         btn_pushup = view.findViewById(R.id.btn_pushup);
         btn_squat = view.findViewById(R.id.btn_squat);
+        btn_witmom = view.findViewById(R.id.btn_witmom);
 
         // 유산소 운동 종류
         btn_cycle = view.findViewById(R.id.btn_cycle);
@@ -393,6 +395,7 @@ public class fragment2 extends Fragment {
         // 설명창
         text_view_explain = view.findViewById(R.id.TextViewExplain);
 
+        btn_witmom.setVisibility(View.GONE);
         btn_running.setVisibility(View.GONE);
         btn_weighttraing.setVisibility(View.GONE);
         btn_pushup.setVisibility(View.GONE);
