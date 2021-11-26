@@ -17,6 +17,7 @@ public class DBHelp_supplementlist extends SQLiteOpenHelper {
     public DBHelp_supplementlist(@Nullable Context context) {
         super(context, DB_name, null, DB_version);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS Toeatlist (num INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT NOT NULL, name TEXT NOT NULL, nut TEXT NOT NULL)");

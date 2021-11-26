@@ -16,15 +16,20 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.Attributes;
+
+import javax.xml.namespace.QName;
 
 public class fragment4 extends Fragment {
     private View view;
-    ListView l_view;
+    RecyclerView l_view;
     Middle_list M_l;
     ArrayList<Toeat> toeats;
+    private DBHelp_supplementlist dbHelpSupplementlist;
     Button btn2, btn3;
 
     @Nullable
@@ -32,11 +37,8 @@ public class fragment4 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment4,container,false);
 
-        l_view=view.findViewById(R.id.Listview2);
-        toeats = new ArrayList<Toeat>();
-        toeats.add(new Toeat());
-        M_l = new Middle_list(getContext(),toeats);
-        l_view.setAdapter(M_l);
+        l_view = (RecyclerView) view.findViewById(R.id.list2);
+        lstart();
 
         btn2=view.findViewById(R.id.button2);
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +60,20 @@ public class fragment4 extends Fragment {
 
         return view;
 
+    }
+    private void lstart() {
+        dbHelpSupplementlist = new DBHelp_supplementlist(getContext());
+        toeats = new ArrayList<Toeat>();
+        l_view.setAdapter(M_l);
+
+        loaddb();
+    }
+    private void loaddb() {
+        toeats= dbHelpSupplementlist.getToeatlist();
+        if (M_l==null){
+            M_l = new Middle_list(toeats, getContext());
+            l_view.setHasFixedSize(true);
+        }
     }
 
 }

@@ -116,6 +116,5 @@ public class Middle extends RecyclerView.Adapter<Middle.VH> {
         toeats.add(0,_item);
         notifyItemInserted(0);
 
-
     }
 }
