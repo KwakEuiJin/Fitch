@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BodyActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#F0EFFF">
 
     <TextView
         android:layout_width="match_parent"
@@ -20,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/bottom_teduri">
+        android:background="@drawable/bottom_teduri"
+        android:backgroundTint="#F0EFFF">
 
         <TextView
         android:layout_width="wrap_content"
@@ -45,7 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/bottom_teduri">
+        android:background="@drawable/bottom_teduri"
+        android:backgroundTint="#F0EFFF">
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,7 +74,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/bottom_teduri">
+        android:background="@drawable/bottom_teduri"
+        android:backgroundTint="#F0EFFF">
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,7 +100,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/bottom_teduri">
+        android:background="@drawable/bottom_teduri"
+        android:backgroundTint="#F0EFFF">
 
         <TextView
             android:layout_width="wrap_content"

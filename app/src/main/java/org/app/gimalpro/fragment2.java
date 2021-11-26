@@ -14,12 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.HorizontalBarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -33,7 +27,7 @@ public class fragment2 extends Fragment {
     Double user_kcal=0.0;
     ProgressBar progressBar;
     //임시
-    TextView textView,textView1,textView2;
+    TextView textView1,textView2;
 
     Button btn_running, btn_weighttraing, btn_pushup, btn_squat, btn_witmom; // 무산소 운동
     Button btn_cycle, btn_jul, btn_mountin, btn_walking; // 유산소 운동
@@ -52,7 +46,6 @@ public class fragment2 extends Fragment {
         //db 객체 선언
         dbHelper_body=new DBHelper_body(getContext());
         //임시
-        textView=view.findViewById(R.id.textView);
 
         try {
             bodyitems = dbHelper_body.selectBody();
@@ -66,7 +59,7 @@ public class fragment2 extends Fragment {
         } catch (ArrayIndexOutOfBoundsException e){
 
         }
-        textView.setText(String.format("%.2f %s",user_kcal,"Kcal"));
+
 
 
         //버튼이벤트
@@ -373,7 +366,6 @@ public class fragment2 extends Fragment {
         } catch (ArrayIndexOutOfBoundsException e){
 
         }
-        textView.setText(String.format("%.2f %s",user_kcal,"Kcal"));
     }
 
     public void bt_gone(){
@@ -426,8 +418,8 @@ public class fragment2 extends Fragment {
         progressBar=view.findViewById(R.id.progressBar);
         progressBar.setProgress(percent);
         progressBar.setMax(gicho);
-        textView1.setText(String.format("%d %s",gicho,"Kcal"));
-        textView2.setText(percent_view);
+        textView1.setText(percent_view);
+        textView2.setText(String.format("%.2f %s %d %s",user_kcal,"Kcal /",gicho,"Kcal "));
     }
 
     }

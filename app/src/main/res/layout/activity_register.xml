@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="#F0EFFF">
    <LinearLayout
        android:layout_marginTop="30dp"
        android:layout_width="match_parent"
@@ -37,7 +37,25 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="비밀번호"/>
+        android:inputType="textPassword"
+        android:hint="비밀번호(특수기호 포함)"/>
+       <EditText
+           android:id="@+id/et_pass_ok"
+           android:layout_marginTop="20dp"
+           android:layout_width="300dp"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:inputType="textPassword"
+           android:hint="비밀번호 확인"/>
+       <TextView
+           android:id="@+id/tv_pass_err"
+           android:layout_marginLeft="60sp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:visibility="gone"
+           android:text="*비밀번호가 다릅니다."
+           android:textColor="#FF0000"/>
+
     <EditText
         android:id="@+id/et_name"
         android:layout_marginTop="20dp"
@@ -73,7 +91,7 @@
                android:id="@+id/rb_man"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:layout_marginLeft="20dp"
+               android:layout_marginLeft="30dp"
                android:text="남성"
                />
 
@@ -81,7 +99,7 @@
                android:id="@+id/rb_woman"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:layout_marginLeft="20dp"
+               android:layout_marginLeft="30dp"
                android:text="여성" />
 
 
@@ -94,9 +112,9 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginTop="20dp"
-        android:textColor="@color/white"
-        android:backgroundTint="#3498DB"
-        android:textSize="18dp"
+    android:textColor="@color/white"
+    android:background="#8974FF"
+    android:textSize="18dp"
     android:text="회원가입" />
 
 </LinearLayout>

@@ -3,7 +3,8 @@
     android:id="@+id/TextViewResult"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#F0EFFF">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +13,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         android:orientation="vertical">
 
         <TextView
@@ -32,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:textSize="20dp"
-            android:text="유산소 운동 추천"
+            android:text="핏치의 운동 추천"
              />
 
     </LinearLayout>
@@ -49,31 +50,41 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/teduri">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_running"
+                    android:layout_width="100dp"
+                    android:backgroundTint="#292929"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:gravity="center|bottom"
+                    android:text="달리기"
+                    android:background="@drawable/run"
+                    android:textColor="@color/black"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_walking"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/person"
+                    android:gravity="center|bottom"
+                    android:text="걷기"
+                    android:textColor="@color/black" />
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_witmom"
-            android:layout_width="100dp"
-            android:backgroundTint="#292929"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:gravity="center|bottom"
-            android:text="윗몸일으키기"
-            android:background="@drawable/size_witmom"
-            android:textColor="@color/black"
-             />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_cycle"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/size_cycle"
+                    android:gravity="center|bottom"
+                    android:text="싸이클"
+                    android:textColor="@color/black" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_cycle"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:gravity="center|bottom"
-            android:background="@drawable/size_cycle"
-            android:text="싸이클"
-            android:textColor="@color/black"
-             />
                 <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_mountin"
             android:layout_width="100dp"
@@ -84,138 +95,96 @@
             android:text="마운틴 클라이머"
             android:textColor="@color/black" />
 
+            <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_jul"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:gravity="center|bottom"
+            android:background="@drawable/jul3"
+            android:text="줄넘기"
+            android:textColor="@color/black"/>
+
+
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_jul"
+                    android:id="@+id/btn_weighttraining"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/size_dumbel"
+                    android:gravity="center|bottom"
+                    android:text="근력"
+                    android:textColor="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_squat"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/size_squart"
+                    android:gravity="center|bottom"
+                    android:text="스쿼트"
+                    android:textColor="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_witmom"
+                    android:layout_width="100dp"
+                    android:backgroundTint="#292929"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:gravity="center|bottom"
+                    android:text="윗몸일으키기"
+                    android:background="@drawable/size_witmom"
+                    android:textColor="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_pushup"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
                     android:gravity="center|bottom"
-                    android:background="@drawable/jul3"
-                    android:text="줄넘기"
-                    android:textColor="@color/black"/>
+                    android:background="@drawable/size_pushup"
+                    android:text="푸쉬업"
+                    android:textColor="@color/black"
+                    />
+
+
 
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="20dp"
-            android:text="무산소 운동 추천"
-            />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_pushup"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:gravity="center|bottom"
-            android:background="@drawable/size_pushup"
-            android:text="푸쉬업"
-            android:textColor="@color/black"
-             />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_weighttraining"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/size_dumbel"
-            android:gravity="center|bottom"
-            android:text="근력"
-            android:textColor="@color/black" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_squat"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/size_squart"
-            android:gravity="center|bottom"
-            android:text="스쿼트"
-            android:textColor="@color/black" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_walking"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/person"
-            android:gravity="center|bottom"
-            android:text="걷기"
-            android:textColor="@color/black" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_running"
-            android:layout_width="100dp"
-            android:backgroundTint="#292929"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:gravity="center|bottom"
-            android:text="달리기"
-            android:background="@drawable/run"
-            android:textColor="@color/black"
-            />
-
-    </LinearLayout>
-    </HorizontalScrollView>
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="154dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="TextView" />
         <ProgressBar
             android:id="@+id/progressBar"
-            android:layout_gravity="center"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="300dp"
-            android:layout_height="53dp"
-            android:progressDrawable="@drawable/progressbar_custom"
-            />
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:progressDrawable="@drawable/progressbar_custom" />
+
+
+        <TextView
+            android:id="@+id/textView1"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="TextView" />
+
+
     </LinearLayout>
 
 

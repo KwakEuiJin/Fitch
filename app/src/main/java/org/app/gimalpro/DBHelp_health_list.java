@@ -27,11 +27,11 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
     }
 
     //select문 할일 목록 조회
-    public ArrayList<Todoitem> getTodolist(){
+    public ArrayList<Todoitem> getTodolist(String _futuredate){
         ArrayList<Todoitem> todoitems = new ArrayList<>();
         String _ID=MainActivity.UserID;
         SQLiteDatabase db=getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM Todolist WHERE ID='"+_ID+"'",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM Todolist WHERE ID='"+_ID+"' AND futuredate = '"+_futuredate+"'",null);
         if (cursor.getCount() !=0){    //if문의 getCount가 0이 아니라는 의미는 db에 정보가 있다는 뜻
             while(cursor.moveToNext()){
                 int NUMBER = cursor.getInt(cursor.getColumnIndexOrThrow("NUMBER"));
