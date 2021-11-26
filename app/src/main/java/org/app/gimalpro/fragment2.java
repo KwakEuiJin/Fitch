@@ -1,19 +1,24 @@
 package org.app.gimalpro;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,10 +28,12 @@ public class fragment2 extends Fragment {
     private DBHelper_body dbHelper_body;
     private ArrayList<Bodyitem> bodyitems;
     private View view;
+    Double userHeight=172.0;
     Double userWeight=50.0;
     Double user_kcal=0.0;
+    ProgressBar progressBar;
     //임시
-    TextView textView;
+    TextView textView,textView1,textView2;
 
     Button btn_running, btn_weighttraing, btn_pushup, btn_squat, btn_witmom; // 무산소 운동
     Button btn_cycle, btn_jul, btn_mountin, btn_walking; // 유산소 운동
@@ -46,12 +53,16 @@ public class fragment2 extends Fragment {
         dbHelper_body=new DBHelper_body(getContext());
         //임시
         textView=view.findViewById(R.id.textView);
-        bt_gone();
-        buttonstart();
+
         try {
             bodyitems = dbHelper_body.selectBody();
             userWeight = bodyitems.get(bodyitems.size()-1).getWeight();
             user_kcal = bodyitems.get(bodyitems.size()-1).getKcal();
+            userHeight = bodyitems.get(bodyitems.size()-1).getHeight();
+            bt_gone();
+            buttonstart();
+            setProgressBar();
+
         } catch (ArrayIndexOutOfBoundsException e){
 
         }
@@ -65,7 +76,7 @@ public class fragment2 extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(),Timer.class);
-                    Double kcal=(8.0*userWeight)/3600;
+                    Double kcal=(1000.0*userWeight)/3600;
                     intent.putExtra("kcal",kcal);
                     startActivity(intent);
 
@@ -351,20 +362,6 @@ public class fragment2 extends Fragment {
         }
     }
 
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 100) {
-            if (resultCode != Activity.RESULT_OK) {
-                return;
-            }
-            user_kcal = data.getExtras().getDouble("user_kcal");
-
-        }
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -372,6 +369,7 @@ public class fragment2 extends Fragment {
             bodyitems = dbHelper_body.selectBody();
             userWeight = bodyitems.get(bodyitems.size()-1).getWeight();
             user_kcal = bodyitems.get(bodyitems.size()-1).getKcal();
+            setProgressBar();
         } catch (ArrayIndexOutOfBoundsException e){
 
         }
@@ -405,7 +403,38 @@ public class fragment2 extends Fragment {
         btn_mountin.setVisibility(View.GONE);
         btn_walking.setVisibility(View.GONE);
     }
-}
+
+    public void setProgressBar(){
+        textView1=view.findViewById(R.id.textView1);
+        textView2=view.findViewById(R.id.textView2);
+        Intent intent = getActivity().getIntent();
+        int gicho;
+        int user_age=intent.getIntExtra("userAge",20);
+        String user_gender = intent.getStringExtra("userGender");
+
+        if (user_gender.contains("남성")){
+            gicho= (int) (66.47+(13.75*userWeight)+(5*userHeight)-(6.76*user_age));
+        }
+        else {
+            gicho= (int) (655.1+(9.56*userWeight)+(1.85*userHeight)-(4.68*user_age));
+        }
+
+
+        String percent_view = String.format("%.1f %s",(user_kcal/gicho*100),"%");
+        int percent = (int) (user_kcal/1);
+
+        progressBar=view.findViewById(R.id.progressBar);
+        progressBar.setProgress(percent);
+        progressBar.setMax(gicho);
+        textView1.setText(String.format("%d %s",gicho,"Kcal"));
+        textView2.setText(percent_view);
+    }
+
+    }
+
+
+
+
 
 
 

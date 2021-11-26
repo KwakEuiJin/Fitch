@@ -51,6 +51,7 @@ public class HealthActivity extends AppCompatActivity {
                 dialog.setContentView(R.layout.dialog);
                 Spinner spinner = dialog.findViewById(R.id.spinner);
                 EditText et_content = dialog.findViewById(R.id.et_content);
+
                 Button btn_ok = dialog.findViewById(R.id.bt_ok);
                 btn_ok.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -64,7 +65,7 @@ public class HealthActivity extends AppCompatActivity {
                         Todoitem item = new Todoitem();
                         item.setTitle(exercise);
                         item.setContent(et_content.getText().toString());
-                        item.setWritedate(futureTime);
+                        item.setFuturedate(futureTime);
 
                         adapter.additem(item);
                         rv_todo.smoothScrollToPosition(0);
@@ -98,5 +99,11 @@ public class HealthActivity extends AppCompatActivity {
             rv_todo.setHasFixedSize(true);
             rv_todo.setAdapter(adapter);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadRecentdb();
     }
 }

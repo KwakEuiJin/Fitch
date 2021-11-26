@@ -163,7 +163,7 @@ public class Timer extends AppCompatActivity {  TextView myOutput;
     Double getCal(){
         long now = SystemClock.elapsedRealtime(); //애플리케이션이 실행되고나서 실제로 경과된 시간;
         long outTime = now - myBaseTime;
-        int time = (int) ((outTime/1000)%60);
+        int time = (int) ((outTime/1000));
         Double cal=time*sec_kcal;
         return cal;
     }

@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String userID = jsonObject.getString("userID");
                                 String userPass = jsonObject.getString("userPassword");
                                 String userName = jsonObject.getString("userName");
-                                String userAge = jsonObject.getString("userAge");
+                                int userAge = Integer.parseInt(jsonObject.getString("userAge"));
                                 String userGender = jsonObject.getString("userGender");
 
                                 Toast.makeText(getApplicationContext(), "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();

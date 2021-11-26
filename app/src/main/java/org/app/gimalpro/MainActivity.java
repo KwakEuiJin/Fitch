@@ -35,15 +35,15 @@ public class MainActivity extends AppCompatActivity {
     private fragment5 frag5;
     private DBHelper_body dbHelper_body;
     private ArrayList<Bodyitem> bodyitems;
-    private ActivityResultLauncher<Intent> resultLauncher;
 
-    public static final String UserID=LoginActivity._UserID;
+    public static String UserID=LoginActivity._UserID;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UserID=LoginActivity._UserID;
         dbHelper_body = new DBHelper_body(this);
         bodyitems=dbHelper_body.selectBody();
         //하단 네비게이션
