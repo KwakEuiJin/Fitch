@@ -82,8 +82,7 @@ public class Middle extends RecyclerView.Adapter<Middle.VH> {
                                     public void onClick(View v) {
                                         String Name = tvName.getText().toString();
                                         String Nut = tvNut.getText().toString();
-                                        String beforenut = toeat.getnut();
-                                        dbHelpSupplementlist.updateToeat(MainActivity.UserID,Name,Nut,beforenut);
+                                        dbHelpSupplementlist.updateToeat(MainActivity.UserID,Name,Nut);
 
                                         //ui update
                                         toeat.setname(Name);
@@ -98,8 +97,7 @@ public class Middle extends RecyclerView.Adapter<Middle.VH> {
                                 dialog.show();
                             }
                             else if (position ==1){
-                                String beforenut = toeat.getnut();
-                                dbHelpSupplementlist.deleteToeat(beforenut,MainActivity.UserID);
+                                dbHelpSupplementlist.deleteToeat(MainActivity.UserID);
 
                                 toeats.remove(a);
                                 notifyItemRemoved(a);

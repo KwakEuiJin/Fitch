@@ -57,14 +57,14 @@ public class DBHelp_supplementlist extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Toeatlist(id ,name, nut) VALUES ('"+_id+"','"+_name+"', '"+_nut+"');");
     }
 
-    public void updateToeat(String _id,String _name, String _nut, String _beforenut){
+    public void updateToeat(String _id,String _name, String _nut){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE Toeatlist SET name = '"+_name+"',nut='"+_nut+"' WHERE _nut='"+_beforenut+"' AND id='"+_id+"'");
+        db.execSQL("UPDATE Toeatlist SET name = '"+_name+"',nut='"+_nut+"' WHERE id='"+_id+"'");
 
     }
 
-    public void deleteToeat(String _beforenut,String _id){
+    public void deleteToeat(String _id){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM Toeatlist WHERE _nut = '"+_beforenut+"' AND id = '"+_id+"'");
+        db.execSQL("DELETE FROM Toeatlist WHERE id = '"+_id+"'");
     }
 }

@@ -10,6 +10,10 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+public class UtubePlay {
+    public UtubePlay(){}
+}
+
 public class UtubePlay extends YouTubeBaseActivity implements
         YouTubePlayer.OnInitializedListener {
 

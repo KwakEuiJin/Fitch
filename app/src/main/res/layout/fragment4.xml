@@ -14,7 +14,14 @@
     <ListView
         android:id="@+id/Listview2"
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="250dp" >
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CheckBox" />
+    </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,17 +30,29 @@
 
         <Button
             android:id="@+id/button2"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#3498DB"
             android:text="+" />
 
         <Button
             android:id="@+id/button3"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:backgroundTint="#3498DB"
             android:text="영양제 더보기" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></LinearLayout>
 
 </LinearLayout>

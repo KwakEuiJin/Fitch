@@ -65,6 +65,7 @@
             android:text="확인"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etNut" />
+            app:layout_constraintTop_toBottomOf="@+id/etNut"
+            android:backgroundTint="#3498DB"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
