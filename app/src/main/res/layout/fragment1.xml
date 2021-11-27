@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,58 +7,95 @@
     android:orientation="vertical"
     android:background="#F0EFFF">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_marginTop="20dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/tv_id"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
-        android:layout_gravity="center"
-        android:text="id님 환영합니다."
-        android:textSize="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_body"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginBottom="17dp"
-        android:text="핏치와 함께 운동시작"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_id"
-        app:layout_constraintTop_toBottomOf="@+id/tv_id" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="199dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_gravity="center"
+            android:text="id님 환영합니다."
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="262dp"
+            android:layout_height="243dp"
+            android:layout_marginTop="-45dp"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <Button
+            android:id="@+id/tv_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#8974FF"
+            android:text="신체정보 업데이트"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <Button
             android:id="@+id/bt_health"
-
+            android:backgroundTint="#8974FF"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="일정추가"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="운동계획 추가하기"/>
 
     </LinearLayout>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="horizontal"
+    android:background="@drawable/bottom_teduri">
     <ImageView
-        android:layout_marginLeft="10dp"
+
         android:layout_marginBottom="10dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/video_ut"/>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="5dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="핏치가 추천하는 운동영상 BEST"/>
+</LinearLayout>
     <LinearLayout
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -68,12 +105,14 @@
 
         <ImageView
             android:id="@+id/imv_ut1"
+            android:layout_marginTop="10dp"
             android:layout_width="185dp"
             android:layout_height="120dp"
             android:scaleType="fitXY" />
 
         <ImageView
             android:id="@+id/imv_ut2"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_width="185dp"
             android:layout_height="120dp"
@@ -84,37 +123,53 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bottom_teduri">
+
     <ImageView
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/supplements2"
         app:tint="#8974FF" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="핏치가 추천하는 영양제 BEST"/>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/imv_sup1"
+            android:layout_marginTop="10dp"
             android:layout_width="185dp"
             android:layout_height="120dp"
             android:scaleType="fitXY" />
 
         <ImageView
             android:id="@+id/imv_sup2"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_width="185dp"
             android:layout_height="120dp"
             android:scaleType="fitXY" />
-
-
-
-
     </LinearLayout>
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

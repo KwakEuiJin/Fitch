@@ -130,18 +130,17 @@ public class HealthActivity extends AppCompatActivity {
         todoitems= dbHelpHealthlist.getTodolist(_futuredate);
         if (adapter==null){
             adapter = new Adapter(todoitems,this);
-            rv_todo.setHasFixedSize(true);
             rv_todo.setAdapter(adapter);
         }
     }
 
     private void reloadRecentdb(String _futuredate) {
         //저장되어있던 db가져오는 함수
+       rv_todo = findViewById(R.id.rv_todo);
        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
        rv_todo.setLayoutManager(linearLayoutManager);
        todoitems= dbHelpHealthlist.getTodolist(_futuredate);
        adapter = new Adapter(todoitems,this);
-       rv_todo.setHasFixedSize(true);
        rv_todo.setAdapter(adapter);
 
     }

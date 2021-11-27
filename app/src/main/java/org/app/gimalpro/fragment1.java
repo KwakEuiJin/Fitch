@@ -34,7 +34,9 @@ public class fragment1 extends Fragment {
     ImageView imv_ut1,imv_ut2;
     ImageView imv_sup1,imv_sup2;
     String url_u1_id="lKwZ2DU4P-A";
+    String url_u2_id="Iaa8YNDRbhg";
     String url_sup1="https://static.thcdn.com/images/small/webp/widgets/83-kr/32/1-052732.png";
+    String url_sup2="https://static.thcdn.com/images/small/webp/widgets/83-kr/42/4-052742.png";
 
 
     @Nullable
@@ -53,8 +55,9 @@ public class fragment1 extends Fragment {
         imv_sup2=view.findViewById(R.id.imv_sup2);
 
         Glide.with(getContext()).load(url_set+url_u1_id+url_file).into(imv_ut1);
-        Glide.with(getContext()).load(url_set+url_u1_id+url_file).into(imv_ut2);
+        Glide.with(getContext()).load(url_set+url_u2_id+url_file).into(imv_ut2);
         Glide.with(getContext()).load(url_sup1).into(imv_sup1);
+        Glide.with(getContext()).load(url_sup2).into(imv_sup2);
 
         imv_ut1.setOnClickListener(new View.OnClickListener() {
             @Override

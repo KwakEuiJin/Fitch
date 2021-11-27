@@ -80,7 +80,7 @@
         android:id="@+id/rv_todo"
         android:layout_width="300dp"
         android:layout_height="match_parent"
-
+        android:clipToPadding="false"
         android:scrollbarSize="5dp"
         android:scrollbarThumbVertical="@android:color/darker_gray"
         android:scrollbars="vertical"
