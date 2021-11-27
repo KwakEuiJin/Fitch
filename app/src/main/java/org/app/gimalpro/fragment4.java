@@ -20,9 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.Attributes;
-
-import javax.xml.namespace.QName;
 
 public class fragment4 extends Fragment {
     private View view;
@@ -37,7 +34,7 @@ public class fragment4 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment4,container,false);
 
-        l_view = (RecyclerView) view.findViewById(R.id.list2);
+        l_view = (RecyclerView) view.findViewById(R.id.list);
         lstart();
 
         btn2=view.findViewById(R.id.button2);
