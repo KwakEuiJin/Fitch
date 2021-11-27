@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,8 @@ import androidx.core.app.SharedElementCallback;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class fragment1 extends Fragment {
@@ -23,7 +27,14 @@ public class fragment1 extends Fragment {
     TextView tv_id,tv_body;
     private DBHelper_body dbHelper_body;
     private ArrayList<Bodyitem> bodyitems;
+    String userGender;
     Button bt_health;
+    String url_set="https://img.youtube.com/vi/";
+    String url_file="/0.jpg";
+    ImageView imv_ut1,imv_ut2;
+    ImageView imv_sup1,imv_sup2;
+    String url_u1_id="lKwZ2DU4P-A";
+    String url_sup1="https://static.thcdn.com/images/small/webp/widgets/83-kr/32/1-052732.png";
 
 
     @Nullable
@@ -36,9 +47,30 @@ public class fragment1 extends Fragment {
         dbHelper_body = new DBHelper_body(getContext());
         bodyitems = new ArrayList<>();
         bodyitems=dbHelper_body.selectBody();
+        imv_ut1=view.findViewById(R.id.imv_ut1);
+        imv_ut2=view.findViewById(R.id.imv_ut2);
+        imv_sup1=view.findViewById(R.id.imv_sup1);
+        imv_sup2=view.findViewById(R.id.imv_sup2);
+
+        Glide.with(getContext()).load(url_set+url_u1_id+url_file).into(imv_ut1);
+        Glide.with(getContext()).load(url_set+url_u1_id+url_file).into(imv_ut2);
+        Glide.with(getContext()).load(url_sup1).into(imv_sup1);
+
+        imv_ut1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), UtubePlay.class);
+                intent.putExtra("id",url_u1_id);
+                startActivity(intent);
+            }
+
+        });
+
+
+
 
         Intent intent = getActivity().getIntent();
-        String userGender = intent.getStringExtra("userGender");
+        userGender = intent.getStringExtra("userGender");
         tv_id.setText(MainActivity.UserID+"님 환영합니다.");
         try {
             if (bodyitems.get(bodyitems.size()-1).getID().isEmpty()){
@@ -79,6 +111,5 @@ public class fragment1 extends Fragment {
         return view;
 
     }
-
 
 }

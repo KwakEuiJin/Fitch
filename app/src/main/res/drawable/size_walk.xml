@@ -13,10 +13,8 @@
 
     </item>
 
-    <item android:drawable="@drawable/witmom"
-        android:width="95dp" android:height="90dp"
-        android:gravity="center">
-    </item>
-
+    <item android:drawable="@drawable/walk"
+        android:width="70dp" android:height="70dp"
+        android:gravity="center"/>
 </layer-list>
 

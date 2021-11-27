@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class BodyActivity extends AppCompatActivity {
     private DBHelper_body dbHelper_body;
     private ArrayList<Bodyitem> bodyitems;
+    String userGender;
     TextView tv_height;
     TextView tv_weight;
     TextView tv_muscle;
@@ -36,10 +37,23 @@ public class BodyActivity extends AppCompatActivity {
         tv_muscle=findViewById(R.id.tv_muscle);
         tv_fat=findViewById(R.id.tv_fat);
         bt_f2=findViewById(R.id.bt_f2);
+        bt_input=findViewById(R.id.bt_input);
+        bt_update=findViewById(R.id.bt_update);
+
+        Intent intent = getIntent();
+        userGender = intent.getStringExtra("userGender");
 
         dbHelper_body=new DBHelper_body(this);
 
         loadRecentdb();
+        if (bodyitems.isEmpty()){
+            bt_input.setEnabled(true);
+            bt_update.setEnabled(false);
+        }
+        else {
+            bt_input.setEnabled(false);
+            bt_update.setEnabled(true);
+        }
 
 
         //프래그먼트 2로 이동
@@ -48,13 +62,13 @@ public class BodyActivity extends AppCompatActivity {
             public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             intent.putExtra("f2","f2");
+            intent.putExtra("userGender",userGender);
             startActivity(intent);
             }
         });
 
 
         //신체정보 입력 버튼 이벤트
-        bt_input=findViewById(R.id.bt_input);
         bt_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,9 +102,6 @@ public class BodyActivity extends AppCompatActivity {
                             Double userMuscle=Double.parseDouble(et_muscle.getText().toString());
                             Double userFat=Double.parseDouble(et_fat.getText().toString());
                             //유저의 신체정보 등급 나누기
-                            Intent intent = getIntent();
-
-                            String userGender = intent.getStringExtra("userGender");
                             Double mMuscle=0.0; //근육량
                             Double Muscle_b=0.0; //근격골 비율
                             int userMuscle_level=0; //근격골율 등급
@@ -135,10 +146,10 @@ public class BodyActivity extends AppCompatActivity {
 
                             else{
                                 Fat_b=(userFat/userWeight)*100;
-                                if (Fat_b<25){
+                                if (Fat_b<22){
                                     userFat_level=0;
                                 }
-                                else if (Fat_b<35){
+                                else if (Fat_b<27){
                                     userFat_level=1;
                                 }
                                 else {
@@ -191,13 +202,8 @@ public class BodyActivity extends AppCompatActivity {
                         tv_fat.setText(String.format("%.2f",item.getFat()));
                         dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "새로운 신체정보가 추가되었습니다.", Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
-
+                        bt_input.setEnabled(false);
+                        bt_update.setEnabled(true);
                         }
 
                     }
@@ -207,27 +213,8 @@ public class BodyActivity extends AppCompatActivity {
             }
         });
 
-
-
-        //길게누르면 신체정보 삭제(임의로 넣어둔 기능)
-        tv_height.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                bodyitems = dbHelper_body.selectBody();
-                //db delete
-                dbHelper_body.deleteBody(MainActivity.UserID,bodyitems.get(bodyitems.size()-1).getNUMBER());
-                tv_height.setText("(CM)");
-                tv_weight.setText("(KG)");
-                tv_muscle.setText("(KG)");
-                tv_fat.setText("(KG)");
-
-                return true;
-            }
-        });
-
     //신체정보 수정하기 기능
         //update
-        bt_update=findViewById(R.id.bt_update);
         bt_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -258,13 +245,12 @@ public class BodyActivity extends AppCompatActivity {
                             Double userFat=Double.parseDouble(et_fat.getText().toString());
                             //유저의 신체정보 등급 나누기
                             Intent intent = getIntent();
-
                             String userGender = intent.getStringExtra("userGender");
                             Double mMuscle=0.0; //근육량
-                            Double Muscle_b=(userMuscle/userWeight)*100; //근격골 비율
+                            Double Muscle_b=0.0; //근격골 비율
                             int userMuscle_level=0; //근격골율 등급
                             Double mFat = 0.0; //제지방량
-                            Double Fat_b=(userFat/userWeight)*100; //체지방 비율
+                            Double Fat_b=0.0; //체지방 비율
                             int userFat_level=0; //체지방율 등급
 
                             //제지방량 구하기
@@ -287,6 +273,7 @@ public class BodyActivity extends AppCompatActivity {
                             }
                             //체지방율 구하기, 체지방 등급선정
                             if (userGender.contains("남성")){
+                                Fat_b=(userFat/userWeight)*100;
                                 if (Fat_b<15){
                                     userFat_level=0;
                                 }
@@ -300,10 +287,11 @@ public class BodyActivity extends AppCompatActivity {
 
 
                             else{
-                                if (Fat_b<25){
+                                Fat_b=(userFat/userWeight)*100;
+                                if (Fat_b<22){
                                     userFat_level=0;
                                 }
-                                else if (Fat_b<35){
+                                else if (Fat_b<27){
                                     userFat_level=1;
                                 }
                                 else {
@@ -314,6 +302,7 @@ public class BodyActivity extends AppCompatActivity {
 
                             //근격골율 구하기
                             if (userGender.contains("남성")){
+                                Muscle_b = (userMuscle/userWeight)*100;
                                 if (Muscle_b<32){
                                     userMuscle_level=0;
                                 }
@@ -327,6 +316,7 @@ public class BodyActivity extends AppCompatActivity {
 
 
                             else{
+                                Muscle_b = (userMuscle/userWeight)*100;
                                 if (Muscle_b<26.5){
                                     userMuscle_level=0;
                                 }
@@ -336,11 +326,6 @@ public class BodyActivity extends AppCompatActivity {
                                 else {
                                     userMuscle_level=2;
                                 }}
-
-
-
-
-
 
                         //update
                         if(!bodyitems.isEmpty()){
@@ -407,6 +392,7 @@ public class BodyActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        intent.putExtra("userGender",userGender);
         startActivity(intent);
     }
 }

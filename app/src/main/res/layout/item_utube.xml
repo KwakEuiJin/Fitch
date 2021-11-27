@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dip"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@drawable/teduri2">
 
     <LinearLayout
         android:layout_width="0dip"

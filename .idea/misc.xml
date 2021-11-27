@@ -26,12 +26,26 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/GimalPro/app/src/main/res/layout/item_list.xml" value="0.2046875" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GimalPro/app/src/main/res/menu/bottom_navi.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/bottom_teduri.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/bt-image_round.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/edittext_back.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/progressbar_custom.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/round.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/round2.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/round_BOLD.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/size_cycle.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/size_dumbel.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/size_jul.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/size_mountin.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/size_pushup.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/size_run.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/size_squart.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/size_sup.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/size_walk.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/size_witmom.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/teduri.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/teduri2.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/teduri_imagebt.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/drawable/video_ut.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/layout/activity_body.xml" value="0.2694746376811594" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/layout/activity_health.xml" value="0.2694746376811594" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/layout/activity_login.xml" value="0.33" />
@@ -45,7 +59,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/layout/dialog_body_insert.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/layout/dialog_body_update.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/layout/fragment1.xml" value="0.2694746376811594" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/layout/fragment2.xml" value="0.2694746376811594" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/layout/fragment2.xml" value="0.44593639575971733" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/layout/fragment3.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/layout/fragment4.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Gimalboksa/app/src/main/res/layout/fragment5.xml" value="0.36614583333333334" />

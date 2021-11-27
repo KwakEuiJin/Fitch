@@ -3,14 +3,12 @@
 
     <item
         android:bottom="1dp"
-        android:left="1dp"
-        android:top="1dp"
-        android:right="1dp"
-        >
+        android:left="-2dp"
+        android:right="-2dp"
+        android:top="-2dp">
         <shape android:shape="rectangle" >
             <stroke
-
-                android:width="2dp"
+                android:width="1dp"
                 android:color="#8974FF" />
 
             <solid android:color="#F0EFFF" />
@@ -18,3 +16,5 @@
     </item>
 
 </layer-list>
+
+

@@ -22,9 +22,11 @@ public class fragment2 extends Fragment {
     private DBHelper_body dbHelper_body;
     private ArrayList<Bodyitem> bodyitems;
     private View view;
-    Double userHeight=172.0;
-    Double userWeight=50.0;
+    String user_gender="남성"; // 디폴트값
+    Double userHeight=172.0; // 디폴트값
+    Double userWeight=50.0; //디폴트값 - setprogressbar()에서 키와 몸무게 받음
     Double user_kcal=0.0;
+    int user_age=21;
     ProgressBar progressBar;
     //임시
     TextView textView1,textView2;
@@ -52,14 +54,15 @@ public class fragment2 extends Fragment {
             userWeight = bodyitems.get(bodyitems.size()-1).getWeight();
             user_kcal = bodyitems.get(bodyitems.size()-1).getKcal();
             userHeight = bodyitems.get(bodyitems.size()-1).getHeight();
-            bt_gone();
-            buttonstart();
-            setProgressBar();
 
         } catch (ArrayIndexOutOfBoundsException e){
 
         }
 
+        bt_gone();
+        buttonstart();
+
+        setProgressBar();
 
 
         //버튼이벤트
@@ -69,7 +72,7 @@ public class fragment2 extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(),Timer.class);
-                    Double kcal=(1000.0*userWeight)/3600;
+                    Double kcal=(8.0*userWeight)/3600;
                     intent.putExtra("kcal",kcal);
                     startActivity(intent);
 
@@ -401,14 +404,28 @@ public class fragment2 extends Fragment {
         textView2=view.findViewById(R.id.textView2);
         Intent intent = getActivity().getIntent();
         int gicho;
-        int user_age=intent.getIntExtra("userAge",20);
-        String user_gender = intent.getStringExtra("userGender");
+        user_age=intent.getIntExtra("userAge",20);
+        user_gender = intent.getStringExtra("userGender");
+        Toast.makeText(getContext(), userHeight+" "+userWeight+" "+user_age, Toast.LENGTH_SHORT).show();
 
         if (user_gender.contains("남성")){
-            gicho= (int) (66.47+(13.75*userWeight)+(5*userHeight)-(6.76*user_age));
+            int hwaldong=35;
+            if (((userHeight-99))<=userWeight){
+                hwaldong=40;
+            }
+
+            else if (((userHeight-99)*0.9)<=userWeight){
+                hwaldong=35;
+            }
+
+            else {
+                hwaldong=30;
+            }
+
+            gicho= (int) ((((userHeight-100)*0.9)*hwaldong)-(66.47+(13.75*userWeight)+(5*userHeight)-(6.76*user_age)));
         }
         else {
-            gicho= (int) (655.1+(9.56*userWeight)+(1.85*userHeight)-(4.68*user_age));
+            gicho= (int) ((((userHeight-100)*0.9)*40)-(655.1+(9.56*userWeight)+(1.85*userHeight)-(4.68*user_age)));
         }
 
 

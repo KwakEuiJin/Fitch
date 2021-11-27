@@ -22,7 +22,7 @@
     <item
         android:id="@+id/a_cap"
         android:enabled="true"
-        android:icon="@drawable/cap"
+        android:icon="@drawable/supplements2"
         android:title="영양제"/>
 
     <item

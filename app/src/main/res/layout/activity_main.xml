@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#F0EFFF">
 
     <FrameLayout
         android:id="@+id/main_frame"
@@ -25,7 +26,8 @@
         app:itemTextColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navi"
-        tools:layout_editor_absoluteX="1dp">
+        tools:layout_editor_absoluteX="1dp"
+        android:background="#F0EFFF">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
