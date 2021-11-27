@@ -3,11 +3,9 @@
 
     <item>
         <shape>
+            <corners android:radius="60dp"/>
+            <solid android:color="#FFF"/>
 
-            <corners android:radius="10dp"/>
-
-            <stroke android:color="@color/black"
-                android:width="1dp"/>
 
         </shape>
 
@@ -15,6 +13,6 @@
 
     <item android:drawable="@drawable/walk"
         android:width="70dp" android:height="70dp"
-        android:gravity="center"/>
+        android:gravity="center" />
 </layer-list>
 

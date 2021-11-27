@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,8 +33,9 @@ public class fragment2 extends Fragment {
     //임시
     TextView textView1,textView2;
 
-    Button btn_running, btn_weighttraing, btn_pushup, btn_squat, btn_witmom; // 무산소 운동
-    Button btn_cycle, btn_jul, btn_mountin, btn_walking; // 유산소 운동
+    ImageButton bt_running, bt_weighttraing, bt_pushup, bt_squat, bt_witmom; // 무산소 운동
+    ImageButton bt_cycle, bt_jul, bt_mountin, bt_walking;
+    LinearLayout btn_cycle, btn_jul, btn_mountin, btn_walking,btn_running, btn_weighttraing, btn_pushup, btn_squat, btn_witmom;    // 유산소 운동
 
     TextView text_view_explain;
 
@@ -47,7 +50,20 @@ public class fragment2 extends Fragment {
         view = inflater.inflate(R.layout.fragment2, container, false);
         //db 객체 선언
         dbHelper_body=new DBHelper_body(getContext());
-        //임시
+
+        //무산소
+        bt_weighttraing = view.findViewById(R.id.bt_weighttraining);
+        bt_pushup = view.findViewById(R.id.bt_pushup);
+        bt_squat = view.findViewById(R.id.bt_squat);
+        bt_witmom = view.findViewById(R.id.bt_witmom);
+
+        // 유산소 운동 종류
+        bt_running = view.findViewById(R.id.bt_running);
+        bt_cycle = view.findViewById(R.id.bt_cycle);
+        bt_jul = view.findViewById(R.id.bt_jul);
+        bt_mountin = view.findViewById(R.id.bt_mountin);
+        bt_walking = view.findViewById(R.id.bt_walking);
+
 
         try {
             bodyitems = dbHelper_body.selectBody();
@@ -202,7 +218,7 @@ public class fragment2 extends Fragment {
                             btn_pushup.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==4){
-                            btn_pushup.setVisibility(View.VISIBLE);
+                            btn_squat.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -210,6 +226,7 @@ public class fragment2 extends Fragment {
                     for(int i= 3; i< count; i++){
                         if(rand_list[i]==1){
                             btn_cycle.setVisibility(View.VISIBLE);
+                            btn_running.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==2){
                            btn_jul.setVisibility(View.VISIBLE);
@@ -233,6 +250,7 @@ public class fragment2 extends Fragment {
                     for(int i= 0; i< count; i++){
                         if(rand_list[i]==1){
                             btn_cycle.setVisibility(View.VISIBLE);
+                            btn_running.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==2){
                             btn_jul.setVisibility(View.VISIBLE);
@@ -253,7 +271,7 @@ public class fragment2 extends Fragment {
                     //첫번째, 두번째로 나온 랜덤숫자는 추천할 무산소운동의 index
                     for (int i = 0; i < 2; i++) {
                         if (rand_list[i] == 1) {
-                           btn_running.setVisibility(View.VISIBLE);
+                           btn_witmom.setVisibility(View.VISIBLE);
                         } else if (rand_list[i] == 2) {
                            btn_weighttraing.setVisibility(View.VISIBLE);
                         } else if (rand_list[i] == 3) {
@@ -267,6 +285,7 @@ public class fragment2 extends Fragment {
                     for (int i = 2; i < count; i++) {
                         if(rand_list[i]==1){
                             btn_cycle.setVisibility(View.VISIBLE);
+                            btn_running.setVisibility(View.VISIBLE);
                         }
                         else if(rand_list[i]==2){
                             btn_jul.setVisibility(View.VISIBLE);
@@ -291,7 +310,7 @@ public class fragment2 extends Fragment {
                 //첫번째, 두번째, 세번째로 나온 랜덤숫자는 추천할 무산소운동의 index
                 for(int i=0; i< 3; i++){
                     if (rand_list[i] == 1) {
-                        btn_running.setVisibility(View.VISIBLE);
+                        btn_witmom.setVisibility(View.VISIBLE);
                     } else if (rand_list[i] == 2) {
                         btn_weighttraing.setVisibility(View.VISIBLE);
                     } else if (rand_list[i] == 3) {
@@ -305,6 +324,7 @@ public class fragment2 extends Fragment {
                 for(int i= 3; i< count; i++){
                     if(rand_list[i]==1){
                         btn_cycle.setVisibility(View.VISIBLE);
+                        btn_running.setVisibility(View.VISIBLE);
                     }
                     else if(rand_list[i]==2){
                         btn_jul.setVisibility(View.VISIBLE);
@@ -327,7 +347,7 @@ public class fragment2 extends Fragment {
                 //첫번째로 나온 랜덤숫자는 추천할 무산소운동의 index
                 for(int i=0; i< 1; i++){
                     if (rand_list[i] == 1) {
-                        btn_running.setVisibility(View.VISIBLE);
+                        btn_witmom.setVisibility(View.VISIBLE);
                     } else if (rand_list[i] == 2) {
                         btn_weighttraing.setVisibility(View.VISIBLE);
                     } else if (rand_list[i] == 3) {
@@ -341,6 +361,7 @@ public class fragment2 extends Fragment {
                 for(int i= 1; i< count; i++){
                     if(rand_list[i]==1){
                         btn_cycle.setVisibility(View.VISIBLE);
+                        btn_running.setVisibility(View.VISIBLE);
                     }
                     else if(rand_list[i]==2){
                         btn_jul.setVisibility(View.VISIBLE);

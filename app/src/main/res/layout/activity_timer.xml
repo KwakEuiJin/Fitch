@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="330dp"
@@ -12,7 +13,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/layout_teduri">
+
+        <ImageView
+            android:layout_width="62dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/timer_24"
+            app:layout_constraintBottom_toTopOf="@+id/time_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/bt_start"
@@ -22,8 +33,11 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="73dp"
             android:layout_weight="1"
+            android:backgroundTint="#8974FF"
             android:onClick="myOnClick"
-            android:text="시작"
+            android:text="START"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/bt_pause"
             app:layout_constraintStart_toStartOf="parent" />
@@ -36,8 +50,11 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="73dp"
             android:layout_weight="1"
+            android:backgroundTint="#8974FF"
             android:onClick="myOnClick"
-            android:text="멈춤"
+            android:text="STOP"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/bt_start" />
@@ -47,34 +64,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/roundt_puple"
             android:gravity="center"
-            android:text="00:00"
+            android:padding="5dp"
+            android:text="00:00:00"
             android:textColor="#777777"
             android:textSize="60sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_cal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tv_cal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/roundt_puple"
             android:gravity="center"
-            android:text="0 kcal"
+            android:padding="5dp"
+            android:text="0.0 kcal"
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.557" />
 
         <Button
             android:id="@+id/bt_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="운동종료"
+            android:text="FINISH"
+            android:backgroundTint="#8974FF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
