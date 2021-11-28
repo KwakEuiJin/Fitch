@@ -77,7 +77,7 @@ public class fragment1 extends Fragment {
         tv_id.setText(MainActivity.UserID+"님 환영합니다.");
         try {
             if (bodyitems.get(bodyitems.size()-1).getID().isEmpty()){
-                tv_body.setText("신체정보를 입력해주세요");}
+                tv_body.setText("신체정보 추가하기");}
             else {
                 tv_body.setText("신체정보 업데이트");
             }

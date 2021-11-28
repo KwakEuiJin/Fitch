@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,8 @@ public class BodyActivity extends AppCompatActivity {
     Button bt_input;
     Button bt_update;
     Button bt_f2;
-
+    TextView tv_mus_b,tv_fat_b;
+    ProgressBar progressBar_mus,progressBar_fat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,10 @@ public class BodyActivity extends AppCompatActivity {
         bt_f2=findViewById(R.id.bt_f2);
         bt_input=findViewById(R.id.bt_input);
         bt_update=findViewById(R.id.bt_update);
+        tv_mus_b=findViewById(R.id.tv_mus_b);
+        tv_fat_b=findViewById(R.id.tv_fat_b);
+        progressBar_mus=findViewById(R.id.progressBar_mus);
+        progressBar_fat=findViewById(R.id.progressBar_fat);
 
         Intent intent = getIntent();
         userGender = intent.getStringExtra("userGender");
@@ -46,6 +52,7 @@ public class BodyActivity extends AppCompatActivity {
         dbHelper_body=new DBHelper_body(this);
 
         loadRecentdb();
+        setprogressbar_body();
         if (bodyitems.isEmpty()){
             bt_input.setEnabled(true);
             bt_update.setEnabled(false);
@@ -225,6 +232,14 @@ public class BodyActivity extends AppCompatActivity {
                 EditText et_weight = dialog.findViewById(R.id.et_weight);
                 EditText et_muscle = dialog.findViewById(R.id.et_muscle);
                 EditText et_fat = dialog.findViewById(R.id.et_fat);
+
+                if (!bodyitems.isEmpty()){
+                    et_height.setText(String.format("%.1f",bodyitems.get(bodyitems.size()-1).getHeight()));
+                    et_weight.setText(String.format("%.1f",bodyitems.get(bodyitems.size()-1).getWeight()));
+                    et_fat.setText(String.format("%.2f",bodyitems.get(bodyitems.size()-1).getFat()));
+                    et_muscle.setText(String.format("%.2f",bodyitems.get(bodyitems.size()-1).getMuscle()));
+                }
+
                 Button button =dialog.findViewById(R.id.bt_okbody);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -341,6 +356,7 @@ public class BodyActivity extends AppCompatActivity {
                         tv_weight.setText(String.valueOf(item.getWeight()));
                         tv_muscle.setText(String.format("%.2f",item.getMuscle()));
                         tv_fat.setText(String.format("%.2f",item.getFat()));
+                        setprogressbar_body();
                         dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "신체정보가 업데이트 되었습니다.", Toast.LENGTH_SHORT).show();}
 
@@ -388,6 +404,28 @@ public class BodyActivity extends AppCompatActivity {
         }
     }
 
+    public void setprogressbar_body(){
+        Double muscle_b_progress;
+        Double fat_b_progress;
+        int userWeight_progress;
+        if (!bodyitems.isEmpty()){
+            userWeight_progress= (int) (bodyitems.get(bodyitems.size()-1).getWeight()*1);
+            muscle_b_progress= ((bodyitems.get(bodyitems.size()-1).getMuscle()/userWeight_progress)*100);
+            fat_b_progress= ((bodyitems.get(bodyitems.size()-1).getFat()/userWeight_progress)*100);
+            progressBar_mus.setProgress((int) (muscle_b_progress*1));
+            progressBar_fat.setProgress((int) (fat_b_progress*1));
+            tv_mus_b.setText(String.format("%.1f %s",muscle_b_progress,"%"));
+            tv_fat_b.setText(String.format("%.1f %s",fat_b_progress,"%"));
+        }
+        else {
+            progressBar_mus.setProgress(0);
+            progressBar_fat.setProgress(0);
+        }
+    }
+
+
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -395,4 +433,5 @@ public class BodyActivity extends AppCompatActivity {
         intent.putExtra("userGender",userGender);
         startActivity(intent);
     }
+
 }

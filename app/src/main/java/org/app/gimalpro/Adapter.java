@@ -79,7 +79,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int position) {
                             if (position ==0){
-                                //수정
+                                //수정(update)
                                 Dialog dialog = new Dialog(context, android.R.style.Theme_Material_Light_Dialog);
                                 dialog.setContentView(R.layout.dialog);
                                 Spinner spinner = dialog.findViewById(R.id.spinner);
@@ -108,7 +108,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
                                 et_content.setText(todoitem.getContent());
 
-                                //커서 이동
+                                //커서를 텍스트 마지막으로 이동하여 입력할때 편리함 추구
                                 et_content.setSelection(et_content.getText().length());
 
                                 btn_ok.setOnClickListener(new View.OnClickListener() {

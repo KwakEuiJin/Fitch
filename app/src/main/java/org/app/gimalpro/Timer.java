@@ -98,7 +98,7 @@ public class Timer extends AppCompatActivity {  TextView myOutput;
                         myTimer.sendEmptyMessage(0);
                         myBaseTime += (now- myPauseTime);
                         cur_Status=Start;
-                        bt_pause.setText("멈춤");
+                        bt_pause.setText("STOP");
                         bt_start.setEnabled(false);
                         bt_end.setEnabled(false);
                         break;
@@ -116,7 +116,7 @@ public class Timer extends AppCompatActivity {  TextView myOutput;
                         myCount++; //카운트 증가
                         cur_Status = Pause;
                         bt_start.setEnabled(true);
-                        bt_pause.setText("초기화");
+                        bt_pause.setText("RESET");
                         bt_end.setEnabled(true);
                         break;
 
@@ -125,7 +125,7 @@ public class Timer extends AppCompatActivity {  TextView myOutput;
                         myOutput.setText("00:00:00");
                         tv_cal.setText("0 kcal");
                         cur_Status = Start;
-                        bt_pause.setText("멈춤");
+                        bt_pause.setText("STOP");
                         bt_end.setEnabled(true);
                         bt_start.setEnabled(true);
 

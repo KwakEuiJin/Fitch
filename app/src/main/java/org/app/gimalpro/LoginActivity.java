@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -16,9 +17,13 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LoginActivity extends AppCompatActivity {
     EditText et_id,et_pass;
     private Button bt_login,bt_register;
+    private Boolean injection;
     public static String _UserID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,5 +92,15 @@ public class LoginActivity extends AppCompatActivity {
                 queue.add(loginRequest);
             }
         });
+    }
+
+
+
+    //로그아웃 버튼을 누르고 해당 액티비티로 전환된 후 뒤로가기 버튼을 누르면 이전 아이디로 로그인되는 현상을 방지
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ActivityCompat.finishAffinity(this);
+        System.exit(0);
     }
 }

@@ -15,7 +15,7 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="#3498DB"/>
+        android:backgroundTint="#8974FF"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/addsupplement_rv"

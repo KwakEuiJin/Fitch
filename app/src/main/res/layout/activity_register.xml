@@ -51,10 +51,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:inputType="textPassword"
-        android:hint="비밀번호(특수기호 포함)"/>
+        android:hint="비밀번호"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="*문자,숫자,특수기호 포함 8~15자"
+           android:layout_marginLeft="60dp"/>
+
        <EditText
            android:id="@+id/et_pass_ok"
-           android:layout_marginTop="20dp"
+           android:layout_marginTop="10dp"
            android:layout_width="300dp"
            android:layout_height="wrap_content"
            android:layout_gravity="center"

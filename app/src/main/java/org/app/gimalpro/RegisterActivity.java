@@ -19,13 +19,17 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText et_id,et_pass,et_name,et_age;
+    EditText et_id,et_pass,et_name,et_age,et_pass_ok;
     Button bt_register1,bt_validate;
     RadioGroup rg_gender;
     private AlertDialog dialog;
     private boolean validate=false;
+    private Boolean register_success;
 
 
 
@@ -42,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         bt_register1=findViewById(R.id.bt_register1);
         rg_gender=findViewById(R.id.rg_gender);
         bt_validate=findViewById(R.id.bt_validate);
+        et_pass_ok=findViewById(R.id.et_pass_ok);
 
 
         //아이디 중복 확인
@@ -98,54 +103,93 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         //회원가입 버튼 클릭시 실행
-        bt_register1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            String userID=et_id.getText().toString();
-            String userPass=et_pass.getText().toString();
-            String userName=et_name.getText().toString();
-            int userAge=Integer.parseInt(et_age.getText().toString());
-            int gender_id=rg_gender.getCheckedRadioButtonId();
-                RadioButton rb = findViewById(gender_id);
-                String gender=rb.getText().toString();
+        try {
+            bt_register1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String userID=et_id.getText().toString();
+                    String userPass=et_pass.getText().toString();
+                    String userPass_ok=et_pass_ok.getText().toString();
+                    String userName=et_name.getText().toString();
+                    int userAge=Integer.parseInt(et_age.getText().toString());
+                    int gender_id=rg_gender.getCheckedRadioButtonId();
+                    RadioButton rb = findViewById(gender_id);
+                    String gender=rb.getText().toString();
 
 
 
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean success = jsonObject.getBoolean("success");
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                boolean success = jsonObject.getBoolean("success");
 
-                            if(success){//회원등록에 성공한 경우
-                                if(validate){
-                                    Toast.makeText(getApplicationContext(), "회원등록에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                    startActivity(intent);
+                                if(success){//회원등록에 성공한 경우
+                                    if(validate){
+                                        if(password_injection(userPass)){
+                                            if (password_correct(userPass,userPass_ok)){
+                                                Toast.makeText(getApplicationContext(), "회원등록에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+                                                register_success=true;
+                                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                startActivity(intent);
+                                            }
+
+                                            else{
+                                                Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                                                return;
+                                            }
+
+                                        }
+                                        else {Toast.makeText(getApplicationContext(), "비밀번호에 숫자, 문자, 특수문자를 모두 포함하세요(8~15자)", Toast.LENGTH_SHORT).show();
+                                            return;}
+                                    }
+                                    else {
+                                        Toast.makeText(getApplicationContext(), "아이디 중복확인을 해주세요", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
                                 }
-                                else {
-                                    Toast.makeText(getApplicationContext(), "아이디 중복확인을 해주세요", Toast.LENGTH_SHORT).show();
+                                else{//회원등록에 실패한 경우
+                                    Toast.makeText(getApplicationContext(), "회원등록에 실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                                    return;
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "에러발생", Toast.LENGTH_SHORT).show();
                             }
-                            else{//회원등록에 실패한 경우
-                                Toast.makeText(getApplicationContext(), "회원등록에 실패하셨습니다.", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "에러발생", Toast.LENGTH_SHORT).show();
+
                         }
-
-                    }
-                };
-                //서버로 volley를 이용해 요청
-                RegisterRequest registerRequest = new RegisterRequest (userID,userPass,userName,userAge,gender,responseListener);
-                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-                queue.add(registerRequest);
-            }
-        });
-
+                    };
+                    //서버로 volley를 이용해 요청
+                        RegisterRequest registerRequest = new RegisterRequest (userID,userPass,userName,userAge,gender,responseListener);
+                        RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                        queue.add(registerRequest);
+                }
+            });
+        } catch (NumberFormatException e){
+            Toast.makeText(getApplicationContext(), "값을 입력하시오", Toast.LENGTH_SHORT).show();
+        }
 
     }
+
+    public boolean password_injection(String str) {
+        String Passwrod_PATTERN = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{7,15}.$";
+        Pattern pattern = Pattern.compile(Passwrod_PATTERN);
+        Matcher matcher = pattern.matcher(str);
+        return matcher.matches();
+    }
+
+    public boolean password_correct(String str1,String str2){
+        if (str1.length()==0||str2.length()==0){
+            return false;
+        }
+        else if (str1.equals(str2)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
 }
