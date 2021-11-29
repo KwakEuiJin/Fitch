@@ -31,13 +31,13 @@ public class Middle extends RecyclerView.Adapter<Middle.VH> {
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View hd  = LayoutInflater.from(parent.getContext()).inflate(R.layout.supplement_list,parent,false);
+        View hd  = LayoutInflater.from(parent.getContext()).inflate(R.layout.supplement_list2,parent,false);
         return new VH(hd);
     }
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        holder.name.setText(toeats.get(position).getname());
-        holder.nutrition.setText(toeats.get(position).getnut());
+        holder.name.setText(toeats.get(position).getName());
+        holder.nutrition.setText(toeats.get(position).getNut());
 
     }
 
@@ -73,8 +73,8 @@ public class Middle extends RecyclerView.Adapter<Middle.VH> {
                                 EditText tvNut = dialog.findViewById(R.id.tvNut);
                                 Button btn_fin = dialog.findViewById(R.id.btn_fin);
 
-                                tvName.setText(toeat.getname());
-                                tvNut.setText(toeat.getnut());
+                                tvName.setText(toeat.getName());
+                                tvNut.setText(toeat.getNut());
                                 tvName.setSelection(tvName.getText().length());
 
                                 btn_fin.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +85,8 @@ public class Middle extends RecyclerView.Adapter<Middle.VH> {
                                         dbHelpSupplementlist.updateToeat(MainActivity.UserID,Name,Nut);
 
                                         //ui update
-                                        toeat.setname(Name);
-                                        toeat.setnut(Nut);
+                                        toeat.setName(Name);
+                                        toeat.setNut(Nut);
                                         notifyItemChanged(a,toeat);
                                         dialog.dismiss();
                                         Toast.makeText(context.getApplicationContext(), "목록수정 완료", Toast.LENGTH_SHORT).show();

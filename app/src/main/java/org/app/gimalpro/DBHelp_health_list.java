@@ -21,7 +21,7 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS Todolist (NUMBER INTEGER PRIMARY KEY AUTOINCREMENT, ID TEXT NOT NULL, title TEXT NOT NULL, content TEXT NOT NULL, writedate TEXT NOT NULL ,futuredate TEXT NOT NULL )");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Todolist (NUMBER INTEGER PRIMARY KEY AUTOINCREMENT, ID TEXT NOT NULL, title TEXT NOT NULL, content TEXT NOT NULL, writedate TEXT NOT NULL ,futuredate TEXT NOT NULL, switch INTEGER DEFAULT 0  )");
 
 
     }
@@ -40,6 +40,7 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
                 String content = cursor.getString(cursor.getColumnIndexOrThrow("content"));
                 String writedate = cursor.getString(cursor.getColumnIndexOrThrow("writedate"));
                 String futuredate = cursor.getString(cursor.getColumnIndexOrThrow("futuredate"));
+                int switch_check = cursor.getInt(cursor.getColumnIndexOrThrow("switch"));
 
                 Todoitem todoitem =new Todoitem();
                 todoitem.setNUMBER(NUMBER);
@@ -48,6 +49,7 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
                 todoitem.setContent(content);
                 todoitem.setWritedate(writedate);
                 todoitem.setFuturedate(futuredate);
+                todoitem.setSwitch_chek(switch_check);
                 todoitems.add(todoitem);
 
 
@@ -73,15 +75,17 @@ public class DBHelp_health_list extends SQLiteOpenHelper {
         db.execSQL("UPDATE Todolist SET title = '"+_title+"',content='"+_content+"',writedate = '"+_writedate+"' WHERE writedate='"+_beforedate+"' AND ID='"+_ID+"'");
 
     }
+
+    public void updateTodo_switch(String _ID, int _switch, int _Number){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE Todolist  SET switch ='"+_switch+"' WHERE NUMBER='"+_Number+"' AND ID='"+_ID+"'");
+
+    }
+
     //delete문 할일목록 삭제
     public void deleteTodo(String _beforedate,String _ID){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM Todolist WHERE writedate = '"+_beforedate+"' AND ID = '"+_ID+"'");
     }
 
-    //테이블 새로만들때 지우기
-    public void dropTodo() {
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DROP TABLE Todolist");
-    }
 }

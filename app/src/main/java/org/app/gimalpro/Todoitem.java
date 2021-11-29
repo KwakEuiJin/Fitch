@@ -8,6 +8,15 @@ public class Todoitem {
     private String content;
     private String writedate;
     private String futuredate;
+    private int switch_chek;
+
+    public int getSwitch_chek() {
+        return switch_chek;
+    }
+
+    public void setSwitch_chek(int switch_chek) {
+        this.switch_chek = switch_chek;
+    }
 
     public String getFuturedate() {
         return futuredate;

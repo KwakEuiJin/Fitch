@@ -15,12 +15,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 public class fragment2 extends Fragment {
-    private Bodyitem bodyitem;
     private DBHelper_body dbHelper_body;
     private ArrayList<Bodyitem> bodyitems;
     private View view;
@@ -31,9 +35,14 @@ public class fragment2 extends Fragment {
     private int userFatlv;
     private int userMuslv;
     private int user_age=21;
+    private DBHelp_health_list dbHelpHealthlist;
+    private ArrayList<Todoitem> todoitems;
+    private Adapter2 adapter;
+
     ProgressBar progressBar;
     //임시
     TextView textView1,textView2;
+    RecyclerView rv_health;
 
     ImageButton bt_running, bt_weighttraing, bt_pushup, bt_squat, bt_witmom; // 무산소 운동
     ImageButton bt_cycle, bt_jul, bt_mountin, bt_walking; // 유산소 운동
@@ -51,6 +60,7 @@ public class fragment2 extends Fragment {
         view = inflater.inflate(R.layout.fragment2, container, false);
         //db 객체 선언
         dbHelper_body=new DBHelper_body(getContext());
+        dbHelpHealthlist=new DBHelp_health_list(getContext());
 
         //무산소
         bt_weighttraing = view.findViewById(R.id.bt_weighttraining);
@@ -63,6 +73,12 @@ public class fragment2 extends Fragment {
         bt_jul = view.findViewById(R.id.bt_jul);
         bt_mountin = view.findViewById(R.id.bt_mountin);
         bt_walking = view.findViewById(R.id.bt_walking);
+        rv_health = view.findViewById(R.id.rv_health);
+
+
+        String currentdate =new SimpleDateFormat("yyyy년 MM월 dd일").format(new Date());
+        Toast.makeText(getContext(), currentdate, Toast.LENGTH_SHORT).show();
+        loadRecentdb(currentdate);
 
 
         try {
@@ -198,7 +214,6 @@ public class fragment2 extends Fragment {
 
     //버튼이벤트
     public void buttonstart(){
-        bodyitem = new Bodyitem();
 
         // switch가 ON 상태일 때
 
@@ -390,11 +405,13 @@ public class fragment2 extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        String currentdate =new SimpleDateFormat("yyyy년 MM월 dd일").format(new Date());
         try {
             bodyitems = dbHelper_body.selectBody();
             userWeight = bodyitems.get(bodyitems.size()-1).getWeight();
             user_kcal = bodyitems.get(bodyitems.size()-1).getKcal();
             setProgressBar();
+            reloadRecentdb(currentdate);
         } catch (ArrayIndexOutOfBoundsException e){
 
         }
@@ -478,6 +495,28 @@ public class fragment2 extends Fragment {
         textView1.setText(percent_view);
         textView2.setText(String.format("%.2f %s %d %s",user_kcal,"Kcal /",gicho,"Kcal "));
     }
+
+    private void loadRecentdb(String _futuredate) {
+        //저장되어있던 db가져오는 함수
+        todoitems= dbHelpHealthlist.getTodolist(_futuredate);
+        if (adapter==null){
+            adapter = new Adapter2(todoitems,getContext());
+            rv_health.setAdapter(adapter);
+        }
+    }
+
+    private void reloadRecentdb(String _futuredate) {
+        //저장되어있던 db가져오는 함수
+        rv_health = view.findViewById(R.id.rv_health);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rv_health.setLayoutManager(linearLayoutManager);
+        todoitems= dbHelpHealthlist.getTodolist(_futuredate);
+        adapter = new Adapter2(todoitems,getContext());
+        rv_health.setAdapter(adapter);
+
+    }
+
+
 
     }
 

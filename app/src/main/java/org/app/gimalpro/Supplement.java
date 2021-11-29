@@ -50,8 +50,8 @@ public class Supplement extends AppCompatActivity {
                         dbHelpSupplementlist.insertToeat(MainActivity.UserID,etName.getText().toString(),etNut.getText().toString());
 
                         Toeat item = new Toeat();
-                        item.setname(etName.getText().toString());
-                        item.setnut(etNut.getText().toString());
+                        item.setName(etName.getText().toString());
+                        item.setNut(etNut.getText().toString());
 
                         middle.addlist(item);
                         addspm.smoothScrollToPosition(0);

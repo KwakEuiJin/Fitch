@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#F0EFFF">
 
@@ -12,14 +14,25 @@
         android:text="영양제 관리"
         android:textSize="30dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_supplement"
+            android:layout_width="match_parent"
+            android:layout_height="177dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/supplement_list" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
@@ -27,26 +40,73 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="#3498DB"
-            android:text="+" />
+            android:text="영양제 추가"
+            android:backgroundTint="#8974FF"/>
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:backgroundTint="#3498DB"
-            android:text="영양제 더보기" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="영양제 구매"
+            android:textSize="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/bt1"
+                    android:layout_width="40dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:layout_margin="20dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#8974FF"
+                    android:text="일반식" />
+
+                <Button
+                    android:id="@+id/bt2"
+                    android:layout_width="40dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#8974FF"
+                    android:text="비건" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
+
+                <Button
+                    android:id="@+id/bt3"
+                    android:layout_width="40dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#8974FF"
+                    android:text="채식주의" />
+
+                <Button
+                    android:id="@+id/bt4"
+                    android:layout_width="40dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#8974FF"
+                    android:text="글루텐\n미포함" />
+            </LinearLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -29,7 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
     RadioGroup rg_gender;
     private AlertDialog dialog;
     private boolean validate=false;
-    private Boolean register_success;
 
 
 
@@ -103,10 +102,16 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         //회원가입 버튼 클릭시 실행
-        try {
+
             bt_register1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    if (et_id.length()==0||et_name.length()==0||et_age.length()==0||rg_gender.getCheckedRadioButtonId() == -1){
+                        Toast.makeText(getApplicationContext(), "값을 입력하시오", Toast.LENGTH_SHORT).show();
+                    }
+
+                    else{
                     String userID=et_id.getText().toString();
                     String userPass=et_pass.getText().toString();
                     String userPass_ok=et_pass_ok.getText().toString();
@@ -130,7 +135,6 @@ public class RegisterActivity extends AppCompatActivity {
                                         if(password_injection(userPass)){
                                             if (password_correct(userPass,userPass_ok)){
                                                 Toast.makeText(getApplicationContext(), "회원등록에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-                                                register_success=true;
                                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                                 startActivity(intent);
                                             }
@@ -164,11 +168,9 @@ public class RegisterActivity extends AppCompatActivity {
                         RegisterRequest registerRequest = new RegisterRequest (userID,userPass,userName,userAge,gender,responseListener);
                         RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                         queue.add(registerRequest);
-                }
+                }}
             });
-        } catch (NumberFormatException e){
-            Toast.makeText(getApplicationContext(), "값을 입력하시오", Toast.LENGTH_SHORT).show();
-        }
+
 
     }
 

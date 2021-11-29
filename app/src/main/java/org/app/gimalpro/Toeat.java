@@ -5,18 +5,47 @@ public class Toeat {
     private String id;
     private String name;
     private String nut;
+    private int switch_sup;
 
-    public int getnum(){return num;}
-    public void setnum(int num){this.num=num;}
+    public int getNum() {
+        return num;
+    }
 
-    public String getid(){return id;}
-    public void setid(String id){this.id=id;}
+    public void setNum(int num) {
+        this.num = num;
+    }
 
-    public String getname(){return name;}
-    public void setname(String name){this.name=name;}
+    public String getId() {
+        return id;
+    }
 
-    public String getnut(){return nut;}
-    public void setnut(String nut){this.nut=nut;}
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNut() {
+        return nut;
+    }
+
+    public void setNut(String nut) {
+        this.nut = nut;
+    }
+
+    public int getSwitch_sup() {
+        return switch_sup;
+    }
+
+    public void setSwitch_sup(int switch_sup) {
+        this.switch_sup = switch_sup;
+    }
 
     public Toeat(){}
 

@@ -20,7 +20,7 @@ public class DBHelp_supplementlist extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS Toeatlist (num INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT NOT NULL, name TEXT NOT NULL, nut TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Toeatlist (num INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT NOT NULL, name TEXT NOT NULL, nut TEXT NOT NULL, switch_sup INTEGER DEFAULT 0)");
     }
 
     public ArrayList<Toeat> getToeatlist(){
@@ -34,12 +34,14 @@ public class DBHelp_supplementlist extends SQLiteOpenHelper {
                 String id = cursor.getString(cursor.getColumnIndexOrThrow("id"));
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
                 String nut= cursor.getString(cursor.getColumnIndexOrThrow("nut"));
+                int switch_sup = cursor.getInt(cursor.getColumnIndexOrThrow("switch_sup"));
 
                 Toeat toeat =new Toeat();
-                toeat.setnum(num);
-                toeat.setid(id);
-                toeat.setname(name);
-                toeat.setnut(nut);
+                toeat.setNum(num);
+                toeat.setId(id);
+                toeat.setName(name);
+                toeat.setNut(nut);
+                toeat.setSwitch_sup(switch_sup);
                 toeats.add(toeat);
 
 
@@ -63,6 +65,12 @@ public class DBHelp_supplementlist extends SQLiteOpenHelper {
         db.execSQL("UPDATE Toeatlist SET name = '"+_name+"',nut='"+_nut+"' WHERE id='"+_id+"'");
 
     }
+    public void updateswtich_sup(String _id,int _swtich_sup, int number){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE Toeatlist SET switch_sup = '"+_swtich_sup+"' WHERE id='"+_id+"' AND num = '"+number+"'");
+
+    }
+
 
     public void deleteToeat(String _id){
         SQLiteDatabase db = getWritableDatabase();

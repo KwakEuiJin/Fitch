@@ -119,11 +119,11 @@ public class BodyActivity extends AppCompatActivity {
 
                             //제지방량 구하기
                             if (userGender.contains("남성")){
-                                mFat= ((1.10  * userWeight ) - ( 128 * ( Math.pow(userWeight,2)) / (Math.pow(userHeight,2))));
+                                mFat= ((1.10  * userWeight ) - ( 128 * (( Math.pow(userWeight,2)) / (Math.pow(userHeight,2)))));
 
                             }
                             else{
-                                mFat=((1.07  * userWeight ) - ( 128 * ( Math.pow(userWeight,2)) / (Math.pow(userHeight,2))));
+                                mFat=((1.07  * userWeight ) - ( 128 * (( Math.pow(userWeight,2)) / (Math.pow(userHeight,2)))));
                             }
                             //체지방량 모를때
                             if (userFat==0){
@@ -131,10 +131,13 @@ public class BodyActivity extends AppCompatActivity {
 
                             }
 
-                            //근격골량 모를 때
+                            //골격근량 모를 때
                             if(userMuscle==0){
-                                mMuscle = mFat-2.7;
-                                userMuscle=mMuscle*0.577;
+                                if (userGender.contains("남성")){
+                                mMuscle = mFat-5;
+                                userMuscle=mMuscle*0.577;}
+                                else { mMuscle = mFat-4.5;
+                                    userMuscle=mMuscle*0.577;}
                             }
                             //체지방율 구하기, 체지방 등급선정
                             if (userGender.contains("남성")){
@@ -142,7 +145,7 @@ public class BodyActivity extends AppCompatActivity {
                                 if (Fat_b<15){
                                     userFat_level=0;
                                 }
-                                else if (Fat_b<25){
+                                else if (Fat_b<23){
                                     userFat_level=1;
                                 }
                                 else {
@@ -165,13 +168,13 @@ public class BodyActivity extends AppCompatActivity {
 
                             }
 
-                            //근격골율 구하기
+                            //골격근율 구하기
                             if (userGender.contains("남성")){
                                 Muscle_b = (userMuscle/userWeight)*100;
-                                if (Muscle_b<32){
+                                if (Muscle_b<40){
                                     userMuscle_level=0;
                                 }
-                                else if (Muscle_b<40){
+                                else if (Muscle_b<48){
                                     userMuscle_level=1;
                                 }
                                 else {
@@ -182,10 +185,10 @@ public class BodyActivity extends AppCompatActivity {
 
                             else{
                                 Muscle_b = (userMuscle/userWeight)*100;
-                                if (Muscle_b<26.5){
+                                if (Muscle_b<35){
                                     userMuscle_level=0;
                                 }
-                                else if (Muscle_b<32.5){
+                                else if (Muscle_b<45){
                                     userMuscle_level=1;
                                 }
                                 else {
@@ -212,7 +215,7 @@ public class BodyActivity extends AppCompatActivity {
                         bt_input.setEnabled(false);
                         bt_update.setEnabled(true);
                         }
-
+                        setprogressbar_body();
                     }
                 });
                 dialog.show();
@@ -270,21 +273,26 @@ public class BodyActivity extends AppCompatActivity {
 
                             //제지방량 구하기
                             if (userGender.contains("남성")){
-                                mFat= ((1.10  * userWeight ) - ( 128 * ( Math.pow(userWeight,2)) / (Math.pow(userHeight,2))));
+                                mFat= ((1.10 * userWeight ) - (128 * (( Math.pow(userWeight,2)) / (Math.pow(userHeight,2)))));
 
                             }
                             else{
-                                mFat=((1.07  * userWeight ) - ( 128 * ( Math.pow(userWeight,2)) / (Math.pow(userHeight,2))));
+                                mFat=((1.07  * userWeight ) - ( 128 * (( Math.pow(userWeight,2)) / (Math.pow(userHeight,2)))));
                             }
                             //체지방량 모를때
                             if (userFat==0){
                                 userFat=userWeight-mFat;
                             }
 
-                            //근격골량 모를 때
+                            //골격근량 모를 때
                             if(userMuscle==0){
-                                mMuscle = mFat-2.7;
-                                userMuscle=mMuscle*0.577;
+                                if (userGender.contains("남성")){
+                                    mMuscle = mFat-5;
+                                    userMuscle=mMuscle*0.577;}
+                                else{
+                                    mMuscle = mFat-4.5;
+                                    userMuscle=mMuscle*0.577;
+                                }
                             }
                             //체지방율 구하기, 체지방 등급선정
                             if (userGender.contains("남성")){
@@ -292,7 +300,7 @@ public class BodyActivity extends AppCompatActivity {
                                 if (Fat_b<15){
                                     userFat_level=0;
                                 }
-                                else if (Fat_b<25){
+                                else if (Fat_b<23){
                                     userFat_level=1;
                                 }
                                 else {
@@ -314,14 +322,13 @@ public class BodyActivity extends AppCompatActivity {
                                 }
 
                             }
-
-                            //근격골율 구하기
+                            //골격근율 구하기
                             if (userGender.contains("남성")){
-                                Muscle_b = (userMuscle/userWeight)*100;
-                                if (Muscle_b<32){
+                                Muscle_b = ((userMuscle/userWeight)*100);
+                                if (Muscle_b<40){
                                     userMuscle_level=0;
                                 }
-                                else if (Muscle_b<40){
+                                else if (Muscle_b<48){
                                     userMuscle_level=1;
                                 }
                                 else {
@@ -331,11 +338,11 @@ public class BodyActivity extends AppCompatActivity {
 
 
                             else{
-                                Muscle_b = (userMuscle/userWeight)*100;
-                                if (Muscle_b<26.5){
+                                Muscle_b = ((userMuscle/userWeight)*100);
+                                if (Muscle_b<35){
                                     userMuscle_level=0;
                                 }
-                                else if (Muscle_b<32.5){
+                                else if (Muscle_b<45){
                                     userMuscle_level=1;
                                 }
                                 else {
@@ -356,7 +363,7 @@ public class BodyActivity extends AppCompatActivity {
                         tv_weight.setText(String.valueOf(item.getWeight()));
                         tv_muscle.setText(String.format("%.2f",item.getMuscle()));
                         tv_fat.setText(String.format("%.2f",item.getFat()));
-                        setprogressbar_body();
+
                         dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "신체정보가 업데이트 되었습니다.", Toast.LENGTH_SHORT).show();}
 
@@ -364,6 +371,7 @@ public class BodyActivity extends AppCompatActivity {
                             dialog.dismiss();
                             Toast.makeText(getApplicationContext(), "신체정보를 먼저 추가하세요!", Toast.LENGTH_SHORT).show();
                         }}
+                        setprogressbar_body();
                     }
                 });
                 dialog.show();
@@ -405,6 +413,7 @@ public class BodyActivity extends AppCompatActivity {
     }
 
     public void setprogressbar_body(){
+        bodyitems=dbHelper_body.selectBody();
         Double muscle_b_progress;
         Double fat_b_progress;
         int userWeight_progress;
@@ -434,4 +443,9 @@ public class BodyActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setprogressbar_body();
+    }
 }
